@@ -1,0 +1,159 @@
+<section class="wrapper">
+    <!-- * * * * * * * * * header start * * * * * * * * * * -->
+    <header class="d_flex d_flex_column d_jc_center" [class.stickyHeader]="stickyHeader">
+        <div class="se-container">
+            <section class="d_flex d_jc_sb d_ai_center">
+                <div class="burger-menu" *ngIf="mobileMenu">
+                    <span (click)="menuShow()">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100"
+                            viewBox="0 0 32 32">
+                            <path
+                                d="M 4 7 L 4 9 L 28 9 L 28 7 Z M 4 15 L 4 17 L 28 17 L 28 15 Z M 4 23 L 4 25 L 28 25 L 28 23 Z">
+                            </path>
+                        </svg>
+                    </span>
+                </div>
+                <div class="se-logo" routerLink="">
+                    <figure>
+                        <img src="../assets/images/logo.png" class="img-responsive">
+                    </figure>
+                </div>
+                <nav class="navbar" *ngIf="!mobileMenu">
+                    <app-navbar (navId)="navName($event)"></app-navbar>
+                </nav>
+                <!-- <a class="fs_16 fw_600 btn-primary" (click)="contactShow()">
+                    Download Brochure
+                </a> -->
+            </section>
+        </div>
+    </header>
+    <section class="mobile-menu-overlay" *ngIf="isMobileMenu"></section>
+    <section class="mobile-nav" [ngClass]="{'show': isMobileMenu == true}">
+        <section class="mobile-nav-wrapper" >
+            <span class="close-icon" (click)="menuClose()" >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M18.3 5.70998C18.2075 5.61728 18.0976 5.54373 17.9766 5.49355C17.8557 5.44337 17.726 5.41754 17.595 5.41754C17.464 5.41754 17.3344 5.44337 17.2134 5.49355C17.0924 5.54373 16.9825 5.61728 16.89 5.70998L12 10.59L7.11 5.69998C7.01742 5.6074 6.90751 5.53396 6.78655 5.48385C6.66558 5.43375 6.53593 5.40796 6.405 5.40796C6.27407 5.40796 6.14442 5.43375 6.02346 5.48385C5.90249 5.53396 5.79258 5.6074 5.7 5.69998C5.60742 5.79256 5.53398 5.90247 5.48388 6.02344C5.43377 6.1444 5.40798 6.27405 5.40798 6.40498C5.40798 6.53591 5.43377 6.66556 5.48388 6.78652C5.53398 6.90749 5.60742 7.0174 5.7 7.10998L10.59 12L5.7 16.89C5.60742 16.9826 5.53398 17.0925 5.48388 17.2134C5.43377 17.3344 5.40798 17.464 5.40798 17.595C5.40798 17.7259 5.43377 17.8556 5.48388 17.9765C5.53398 18.0975 5.60742 18.2074 5.7 18.3C5.79258 18.3926 5.90249 18.466 6.02346 18.5161C6.14442 18.5662 6.27407 18.592 6.405 18.592C6.53593 18.592 6.66558 18.5662 6.78655 18.5161C6.90751 18.466 7.01742 18.3926 7.11 18.3L12 13.41L16.89 18.3C16.9826 18.3926 17.0925 18.466 17.2135 18.5161C17.3344 18.5662 17.4641 18.592 17.595 18.592C17.7259 18.592 17.8556 18.5662 17.9765 18.5161C18.0975 18.466 18.2074 18.3926 18.3 18.3C18.3926 18.2074 18.466 18.0975 18.5161 17.9765C18.5662 17.8556 18.592 17.7259 18.592 17.595C18.592 17.464 18.5662 17.3344 18.5161 17.2134C18.466 17.0925 18.3926 16.9826 18.3 16.89L13.41 12L18.3 7.10998C18.68 6.72998 18.68 6.08998 18.3 5.70998Z"
+                        fill="black" />
+                </svg>
+            </span>
+            <app-navbar (navId)="navName($event)" (click)="menuClose()"></app-navbar>
+        </section>
+    </section>
+    <!-- * * * * * * * header End * * * * * * * * -->
+    <div class="page-content">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- * * * * * * * * * Footer start * * * * * * * * * * -->
+    <footer>
+        <section class="se-container">
+            <div class="row row1 d_flex d_jc_sb">
+                <div class="colum colum1 d_flex d_flex_column">
+                    <figure>
+                        <img src="../assets/images/se-logo-ftr.png" class="img-responsive" alt="">
+                    </figure>
+                    <div class="d_flex">
+                        <a (click)="contactShow()" class="fs_16 fw_600 btn-primary">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+                <div class="colum colum2 d_flex d_flex_column">
+                    <h2 class="fs_24 fw_600">Company</h2>
+                    <ul class="d_flex ">
+                        <li>
+                            <a (click)="navName('Home')" class="fs_16 fw_500">Home</a>
+                        </li>
+                        <li>
+                            <a (click)="navName('aboutus')" class="fs_16 fw_500">About Us</a>
+                        </li>
+                        <li>
+                            <a (click)="navName('Products')" class="fs_16 fw_500">Products</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="colum colum3">
+                    <h2 class="fs_24 fw_600">Follow Us</h2>
+                    <ul class="d_flex ">
+                        <li>
+                            <a href="http://" target="_blank" class="d_flex d_jc_center d_ai_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22"
+                                        fill="none">
+                                        <path
+                                            d="M4.6875 22H0.328125V7.98438H4.6875V22ZM2.48438 6.10938C1.125 6.10938 0 4.9375 0 3.53125C0 1.60938 2.0625 0.390625 3.75 1.375C4.54688 1.79688 5.01562 2.64062 5.01562 3.53125C5.01562 4.9375 3.89062 6.10938 2.48438 6.10938ZM20.9531 22H16.6406V15.2031C16.6406 13.5625 16.5938 11.5 14.3438 11.5C12.0938 11.5 11.7656 13.2344 11.7656 15.0625V22H7.40625V7.98438H11.5781V9.90625H11.625C12.2344 8.82812 13.6406 7.65625 15.75 7.65625C20.1562 7.65625 21 10.5625 21 14.3125V22H20.9531Z"
+                                            fill="#F2C403" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://" target="_blank" class="d_flex d_jc_center d_ai_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                        fill="none">
+                                        <path
+                                            d="M11.5 5.60938C14.4531 5.60938 16.8906 8.04688 16.8906 11C16.8906 14 14.4531 16.3906 11.5 16.3906C8.5 16.3906 6.10938 14 6.10938 11C6.10938 8.04688 8.5 5.60938 11.5 5.60938ZM11.5 14.5156C13.4219 14.5156 14.9688 12.9688 14.9688 11C14.9688 9.07812 13.4219 7.53125 11.5 7.53125C9.53125 7.53125 7.98438 9.07812 7.98438 11C7.98438 12.9688 9.57812 14.5156 11.5 14.5156ZM18.3438 5.42188C18.3438 4.71875 17.7812 4.15625 17.0781 4.15625C16.375 4.15625 15.8125 4.71875 15.8125 5.42188C15.8125 6.125 16.375 6.6875 17.0781 6.6875C17.7812 6.6875 18.3438 6.125 18.3438 5.42188ZM21.9062 6.6875C22 8.42188 22 13.625 21.9062 15.3594C21.8125 17.0469 21.4375 18.5 20.2188 19.7656C19 20.9844 17.5 21.3594 15.8125 21.4531C14.0781 21.5469 8.875 21.5469 7.14062 21.4531C5.45312 21.3594 4 20.9844 2.73438 19.7656C1.51562 18.5 1.14062 17.0469 1.04688 15.3594C0.953125 13.625 0.953125 8.42188 1.04688 6.6875C1.14062 5 1.51562 3.5 2.73438 2.28125C4 1.0625 5.45312 0.6875 7.14062 0.59375C8.875 0.5 14.0781 0.5 15.8125 0.59375C17.5 0.6875 19 1.0625 20.2188 2.28125C21.4375 3.5 21.8125 5 21.9062 6.6875ZM19.6562 17.1875C20.2188 15.8281 20.0781 12.5469 20.0781 11C20.0781 9.5 20.2188 6.21875 19.6562 4.8125C19.2812 3.92188 18.5781 3.17188 17.6875 2.84375C16.2812 2.28125 13 2.42188 11.5 2.42188C9.95312 2.42188 6.67188 2.28125 5.3125 2.84375C4.375 3.21875 3.67188 3.92188 3.29688 4.8125C2.73438 6.21875 2.875 9.5 2.875 11C2.875 12.5469 2.73438 15.8281 3.29688 17.1875C3.67188 18.125 4.375 18.8281 5.3125 19.2031C6.67188 19.7656 9.95312 19.625 11.5 19.625C13 19.625 16.2812 19.7656 17.6875 19.2031C18.5781 18.8281 19.3281 18.125 19.6562 17.1875Z"
+                                            fill="#F2C403" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://" target="_blank" class="d_flex d_jc_center d_ai_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="31" viewBox="0 0 23 31"
+                                        fill="none">
+                                        <path
+                                            d="M9.84375 30.0469C6.79688 26.2383 0 17.1562 0 12C0 5.78906 4.98047 0.75 11.25 0.75C17.4609 0.75 22.5 5.78906 22.5 12C22.5 17.1562 15.6445 26.2383 12.5977 30.0469C11.8945 30.9258 10.5469 30.9258 9.84375 30.0469ZM11.25 15.75C13.3008 15.75 15 14.1094 15 12C15 9.94922 13.3008 8.25 11.25 8.25C9.14062 8.25 7.5 9.94922 7.5 12C7.5 14.1094 9.14062 15.75 11.25 15.75Z"
+                                            fill="#F2C403" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row row2">
+                <p class="fs_16 fw_600 text-center">Copyrights © 2020 All Rights Reserved by Sun Electrical</p>
+            </div>
+        </section>
+    </footer>
+    <!-- * * * * * * * Footer End * * * * * * * * -->
+</section>
+<section class="backdrap" *ngIf="contactPopup" (click)="contactPopup = false"></section>
+<section class="contact-overlay" *ngIf="contactPopup">
+    <section class="contact-block">
+        <span class="close-icon" (click)="contactPopup = false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M18.3 5.70998C18.2075 5.61728 18.0976 5.54373 17.9766 5.49355C17.8557 5.44337 17.726 5.41754 17.595 5.41754C17.464 5.41754 17.3344 5.44337 17.2134 5.49355C17.0924 5.54373 16.9825 5.61728 16.89 5.70998L12 10.59L7.11 5.69998C7.01742 5.6074 6.90751 5.53396 6.78655 5.48385C6.66558 5.43375 6.53593 5.40796 6.405 5.40796C6.27407 5.40796 6.14442 5.43375 6.02346 5.48385C5.90249 5.53396 5.79258 5.6074 5.7 5.69998C5.60742 5.79256 5.53398 5.90247 5.48388 6.02344C5.43377 6.1444 5.40798 6.27405 5.40798 6.40498C5.40798 6.53591 5.43377 6.66556 5.48388 6.78652C5.53398 6.90749 5.60742 7.0174 5.7 7.10998L10.59 12L5.7 16.89C5.60742 16.9826 5.53398 17.0925 5.48388 17.2134C5.43377 17.3344 5.40798 17.464 5.40798 17.595C5.40798 17.7259 5.43377 17.8556 5.48388 17.9765C5.53398 18.0975 5.60742 18.2074 5.7 18.3C5.79258 18.3926 5.90249 18.466 6.02346 18.5161C6.14442 18.5662 6.27407 18.592 6.405 18.592C6.53593 18.592 6.66558 18.5662 6.78655 18.5161C6.90751 18.466 7.01742 18.3926 7.11 18.3L12 13.41L16.89 18.3C16.9826 18.3926 17.0925 18.466 17.2135 18.5161C17.3344 18.5662 17.4641 18.592 17.595 18.592C17.7259 18.592 17.8556 18.5662 17.9765 18.5161C18.0975 18.466 18.2074 18.3926 18.3 18.3C18.3926 18.2074 18.466 18.0975 18.5161 17.9765C18.5662 17.8556 18.592 17.7259 18.592 17.595C18.592 17.464 18.5662 17.3344 18.5161 17.2134C18.466 17.0925 18.3926 16.9826 18.3 16.89L13.41 12L18.3 7.10998C18.68 6.72998 18.68 6.08998 18.3 5.70998Z"
+                    fill="black" />
+            </svg>
+        </span>
+        <section class="user-info">
+            <h2 class="fs_36 fw_800 text-center">Contact Us</h2>
+            <p class="fs_18 fw_500 text-center">Have questions or ready to develop your garment company? </p>
+            <p class="fs_18 fw_500 text-center">We're just a <b class="fw_700"> message away!</b> </p>
+            <p class="fs_18 fw_500 text-center">Reach out today for expert guidance and personalized solutions.</p>
+            <form action="">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name*">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Phone Number*">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Mail Id*">
+                </div>
+                <div class="form-group">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                </div>
+
+                <button class="fs_16 fw_700 text-center form-btn">
+                    Submit
+                </button>
+            </form>
+        </section>
+    </section>
+</section>

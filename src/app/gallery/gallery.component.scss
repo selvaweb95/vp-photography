@@ -1,0 +1,15 @@
+:host{
+    ::ng-deep{
+        .gallery-container{
+            columns: 300px 3;
+            column-gap: 23px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            img{
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 23px;
+            }
+        }
+    }
+}
