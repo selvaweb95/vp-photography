@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   GalleryItem,
   ImageItem,
@@ -14,9 +14,9 @@ import { Lightbox } from 'ng-gallery/lightbox';
 })
 export class GalleryComponent {
   items: GalleryItem[] = [];
-
+  @Input() favorite!:boolean;
   imageData = data;
-
+  selected :any;
   constructor(public gallery: Gallery, public lightbox: Lightbox) {}
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class GalleryComponent {
     this.items = this.imageData.map(
       (item) => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
     );
-
+    // this.favorite=
     /** Lightbox Example */
 
     // Get a lightbox gallery ref
@@ -41,6 +41,13 @@ export class GalleryComponent {
     // Load items into the lightbox gallery ref
     lightboxRef.load(this.items);
   }
+
+  select(item:any) {
+    this.selected = item; 
+};
+isActive(item:any) {
+    return this.selected === item;
+};
 }
 
 

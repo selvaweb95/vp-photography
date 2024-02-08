@@ -15,6 +15,9 @@ import {
 } from 'ng-gallery';
 import { LightboxModule} from 'ng-gallery/lightbox';
 import { GalleryComponent } from './gallery/gallery.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { UserPhotosComponent } from './pages/user-photos/user-photos.component';
+import { LoginComponent } from './pages/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,10 +27,13 @@ import { GalleryComponent } from './gallery/gallery.component';
     WhatwedoComponent,
     WhyusComponent,
     CountUpDirective,
-    GalleryComponent
+    GalleryComponent,
+    TabsComponent,
+    UserPhotosComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     SlickCarouselModule,
     GalleryModule,
