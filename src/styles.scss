@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 :root {
   --block-clr: #000;
   --primary-clr: #00063A;
   --yellow-clr: #00063A;
+  --red-clr: #FF0935;
 }
 
 
@@ -161,7 +163,6 @@ table {
 }
 // display properties
 .d{
-  
   &_flex {
     display: flex;
     &_wrap{
@@ -292,6 +293,9 @@ table {
   }
 }
 
+.red-clr{
+  color: var(--red-clr);
+}
 .hidden{
   overflow: hidden;
   // width: 100%;

@@ -1,0 +1,16 @@
+:host{
+    ::ng-deep{
+        @media (max-width:600px) {
+            .mobile-view{
+                justify-content: center !important;
+                .burger-menu{
+                    position: absolute;
+                    top: 50%;
+                    left: 15px;
+                    transform: translate(0px, -50%);
+                }
+            }
+          }
+        
+    }
+}

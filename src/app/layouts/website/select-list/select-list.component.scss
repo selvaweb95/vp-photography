@@ -1,0 +1,27 @@
+:host{
+    ::ng-deep{
+        h2{
+            padding: 30px 0 50px;
+        }
+        .select-photo-list{
+            max-width: 710px;
+            margin: 0 auto;
+            ul{
+                gap: 30px;
+                li{
+                    cursor: pointer;
+                    position: relative;
+                    min-height: 60px;
+                    border: 1px solid #00063A;
+                    border-radius: 5px;
+                    span{
+                        position: absolute;
+                        right: 30px;
+                        top: 50%;
+                        transform: translate(0,-50%);
+                    }
+                }
+            }
+        }
+    }
+}

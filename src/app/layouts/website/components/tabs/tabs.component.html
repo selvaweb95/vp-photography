@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs d_flex">
+    <li class="nav-item d_flex" *ngFor="let tab of tabsArray;let i=index;" [ngClass]="activatedTab == tab ? 'active':''"  (click)="setTab(tab)">
+      <a class="nav-link fs_16 fw_500" >{{tab}} </a>
+    </li>
+    
+  </ul>

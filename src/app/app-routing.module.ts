@@ -1,9 +1,9 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ProductsComponent } from './pages/products/products.component';
-import { LoginComponent } from './pages/login/login.component';
-import { UserPhotosComponent } from './pages/user-photos/user-photos.component';
+import { HomeComponent } from './layouts/website/home/home.component';
+import { LoginComponent } from './layouts/website/login/login.component';
+import { UserPhotosComponent } from './layouts/website/user-photos/user-photos.component';
+import { SelectListComponent } from './layouts/website/select-list/select-list.component';
 
 const routes: Routes = [
   {
@@ -13,6 +13,10 @@ const routes: Routes = [
   },
   {
     path:'home',
+    component:HomeComponent
+  },
+  {
+    path:'admin/dashboad',
     component:HomeComponent
   },
   {
@@ -26,6 +30,10 @@ const routes: Routes = [
   {
     path:'user-photos',
     component:UserPhotosComponent
+  },
+  {
+    path:'select-photos',
+    component:SelectListComponent
   }
 ];
 

@@ -28,20 +28,20 @@
 <button (click)="slickModal.unslick()">unslick</button> -->
 </section>
 <!-- * * * * * * * banner End * * * * * * * * -->
-
+  
 <!-- * * * * * * * * * welcome start * * * * * * * * * * -->
 <section class="we-are-block hidden">
     <section class="se-container">
         <div class="sub-heading d_flex d_jc_center d_ai_center">
-            <h2 class="fs_48 fw_600">
+            <h2 class="fs_48 fw_600 text-center">
                 Welcome to VP Photography
             </h2>
         </div>
         <div class="text-center welcome-cont">
-            <p class="fs-16 fw_500">
+            <p class="fs-16 fw_500 text-center">
                 WLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum,Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
             </p>
-            <section class="photo-category d_flex d_flex_wrap ">
+            <section class="photo-category ">
                 <article class="d_flex d_flex_column d_jc_center ">
                     <figure>
                         <img src="../../../assets/images/welcome-img1.jpg" class="img-responsive" alt="" srcset="">
@@ -87,13 +87,12 @@
 <section class="products-block hidden">
     <section #products class="se-container">
         <div class="sub-heading d_flex d_jc_center d_ai_center">
-            <h2 class="fs_48 fw_600">
+            <h2 class="fs_48 fw_600 text-center">
                 Gallery
             </h2>
         </div>
 
-        <section class="product-lists" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200"
-            data-aos-duration="500" data-aos-easing="linear">
+        <section class="product-lists" >
 <app-gallery [favorite]="false"></app-gallery>
             
         </section>

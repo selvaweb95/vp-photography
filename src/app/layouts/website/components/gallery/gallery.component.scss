@@ -1,0 +1,71 @@
+:host{
+    ::ng-deep{
+        .gallery-container{
+            columns: 160px 3;
+            column-gap: 23px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            @media (max-width:767px) {
+                column-gap: 10px;
+              }
+            figure{
+                position: relative;
+                .like-dow-icons{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    margin: 6px 10px;
+                    transition: all 0.3s;
+                    background-color: rgb(0 0 0 / 30%);
+                    padding: 5px 14px;
+                    border-radius: 24px;
+                    // transform: translate(0,-60px);
+                    span{
+                        // box-shadow: 0 0 30px -12px rgba(0, 0, 0, 0.206);
+                        cursor: pointer;
+                        &.select{
+                            border: 2px solid rgb(226, 139, 0);
+                            border-radius: 3px;
+                            background-color: transparent;
+                            height: 24px;
+                            width: 24px;
+                            svg{
+                                height: auto;
+                            }
+                        }
+                        svg{
+                            fill: rgb(226, 139, 0);
+                            path{
+                                transition: all 0.3s;
+                                fill: rgba(226, 139, 0, 0);
+                                stroke: rgb(226, 139, 0);
+                            }
+                        }
+                        
+                        &:hover{
+                            svg{
+                                path{
+                                    fill: rgb(226, 139, 0);
+                                    stroke: rgb(226, 139, 0);
+                                }
+                            }
+                        }
+                    }
+                }
+                &:hover{
+                    .like-dow-icons{
+                        // transform: translate(0,0px);
+                    }
+                }
+            }
+            img{
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 23px;
+                @media (max-width:767px) {
+                    margin-bottom: 10px;
+                  }
+            }
+        }
+    }
+}

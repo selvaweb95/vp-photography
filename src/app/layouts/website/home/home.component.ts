@@ -10,7 +10,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
+  value = 'Clear me';
   @ViewChild('Home',{static:true}) Home!:ElementRef;
   @ViewChild('aboutus',{static:true}) aboutus!:ElementRef;
   @ViewChild('products',{static:true}) products!:ElementRef;
