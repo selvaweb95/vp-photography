@@ -21,6 +21,10 @@ import { UserPhotosComponent } from './layouts/website/user-photos/user-photos.c
 import { LoginComponent } from './layouts/website/login/login.component';
 import { HomeComponent } from './layouts/website/home/home.component';
 import { SelectListComponent } from './layouts/website/select-list/select-list.component';
+import { DashboardComponent } from './layouts/admin/dashboard/dashboard.component';
+import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
+import { EventsComponent } from './layouts/admin/events/events.component';
+import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,11 @@ import { SelectListComponent } from './layouts/website/select-list/select-list.c
     TabsComponent,
     UserPhotosComponent,
     LoginComponent,
-    SelectListComponent
+    SelectListComponent,
+    DashboardComponent,
+    MySchedulesComponent,
+    EventsComponent,
+    AdminPanelComponent
   ],
   imports: [
   BrowserModule,

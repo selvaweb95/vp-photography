@@ -191,6 +191,12 @@ table {
 
 // font size and font weight properties
 .fs {
+  &_13 {
+    font-size: 13px;
+  }
+  &_14 {
+    font-size: 13px;
+  }
   &_16 {
     font-size: 16px;
     @media (max-width:1200px) {
@@ -350,6 +356,22 @@ header {
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     @media (max-width:1200px) {
       height: 60px;
+    }
+  }
+}
+.stickyHeader header{
+  height: 70px;
+  // box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  .se-container{
+    width: 100%;
+    max-width: 100%;
+    .se-logo{
+      figure{
+        min-width: 220px;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

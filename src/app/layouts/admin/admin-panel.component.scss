@@ -1,0 +1,67 @@
+:host{
+    ::ng-deep{
+        .admin-panel{
+            .nav-bar{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 100vh;
+                background-color: #00063A;
+                ul{
+                    padding: 100px 20px 50px;
+                    li{
+                        color: #8E8E8E;
+                        margin-bottom: 20px;
+                        b{
+                            padding: 0px 15px;
+                        }
+                        span{
+                            cursor: pointer;
+                            color: #5E5E5E;
+                            min-height: 38px;
+                            position: relative;
+                            background-color: transparent;
+                            transition: all 0.3s;
+                            padding: 10px 15px;
+                            &::after{
+                                position: absolute;
+                                content: '';
+                                top: 50%;
+                                left: 100%;
+                                transform: translate(0,-50%);
+                                width: 0;
+                                height: 42px;
+                                border-top: 20px solid transparent;
+                                border-right: 20px solid white;
+                                border-bottom: 20px solid transparent;
+                                opacity: 0;
+                                transition: all 0.3s;
+                            }
+                            svg{
+                                stroke: #5E5E5E;
+                                path{
+                                    stroke: #5E5E5E;
+                                }
+                            }
+                            &.active,&:hover{
+
+                                background-color:#F7F8FE ;
+                                color: #00063A;
+                                &::after{
+                                    opacity: 1;
+                                }
+                                svg{
+                                    stroke-color: #00063A;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .inner-pages{
+                padding:20px 20px 20px 280px;
+            }
+        }
+    }
+}

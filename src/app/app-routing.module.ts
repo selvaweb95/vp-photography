@@ -4,6 +4,10 @@ import { HomeComponent } from './layouts/website/home/home.component';
 import { LoginComponent } from './layouts/website/login/login.component';
 import { UserPhotosComponent } from './layouts/website/user-photos/user-photos.component';
 import { SelectListComponent } from './layouts/website/select-list/select-list.component';
+import { DashboardComponent } from './layouts/admin/dashboard/dashboard.component';
+import { EventsComponent } from './layouts/admin/events/events.component';
+import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
+import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
 
 const routes: Routes = [
   {
@@ -13,10 +17,6 @@ const routes: Routes = [
   },
   {
     path:'home',
-    component:HomeComponent
-  },
-  {
-    path:'admin/dashboad',
     component:HomeComponent
   },
   {
@@ -34,7 +34,17 @@ const routes: Routes = [
   {
     path:'select-photos',
     component:SelectListComponent
-  }
+  },
+  {
+    path:'admin-panel',
+    component:AdminPanelComponent,
+    children : [
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'events', component: EventsComponent },  
+        { path: 'my-schedules', component: MySchedulesComponent },  
+        { path: '', redirectTo:'dashboard', pathMatch:"full" }
+    ]
+  },
 ];
 
 @NgModule({
