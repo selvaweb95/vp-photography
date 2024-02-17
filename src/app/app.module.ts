@@ -5,16 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import {
-  GalleryModule
-} from 'ng-gallery';
-import { LightboxModule} from 'ng-gallery/lightbox';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { GalleryComponent } from './layouts/website/components/gallery/gallery.component';
 import { TabsComponent } from './layouts/website/components/tabs/tabs.component';
 import { UserPhotosComponent } from './layouts/website/user-photos/user-photos.component';
@@ -25,9 +23,16 @@ import { DashboardComponent } from './layouts/admin/dashboard/dashboard.componen
 import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
 import { EventsComponent } from './layouts/admin/events/events.component';
 import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatSortModule} from '@angular/material/sort';
-import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { CreateEventComponent } from './layouts/admin/create-event/create-event.component';
+import { SelectControlComponent } from './layouts/admin/components/select-control/select-control.component';
+import { DatepickerControlComponent } from './layouts/admin/components/datepicker-control/datepicker-control.component';
+import { InputControlComponent } from './layouts/admin/components/input-control/input-control.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,25 +46,32 @@ import { MatTableModule} from '@angular/material/table';
     DashboardComponent,
     MySchedulesComponent,
     EventsComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    CreateEventComponent,
+    SelectControlComponent,
+    DatepickerControlComponent,
+    InputControlComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     SlickCarouselModule,
     GalleryModule,
     LightboxModule,
     MatSlideToggleModule,
-    MatFormFieldModule, 
-    MatInputModule, 
-    FormsModule, 
-    MatButtonModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
     MatIconModule,
-    MatTableModule, 
-    MatSortModule, 
-    MatPaginatorModule
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: [provideAnimations()],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

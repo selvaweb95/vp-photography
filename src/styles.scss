@@ -6,6 +6,8 @@
   --primary-clr: #00063A;
   --yellow-clr: #00063A;
   --red-clr: #FF0935;
+  --gray-400: #5E5E5E;
+  --dark-blue-clr:#00063A;
 }
 
 
@@ -186,6 +188,16 @@ table {
   &_ai_center {
     align-items: center;
   }
+  &_grid {
+    display: grid;
+    gap: 20px;
+    &_3{
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+    }
+    &_wrap{
+      flex-wrap: wrap;
+    }
+  }
 }
 
 // font size and font weight properties
@@ -233,6 +245,13 @@ table {
   }
   &_36 {
     font-size: 36px;
+    @media (max-width:1200px) {
+      font-size: 32px;
+      line-height: 36px;
+    }
+  }
+  &_40 {
+    font-size: 40px;
     @media (max-width:1200px) {
       font-size: 32px;
       line-height: 36px;
@@ -298,8 +317,97 @@ table {
   }
 }
 
+// padding
+.p{
+  &_10{
+    padding: 10px;
+  }
+  &_t_10{
+    padding-top:10px;
+  }
+  &_b_10{
+    padding-bottom:10px;
+  }
+  &_l_10{
+    padding-left:10px;
+  }
+  &_r_10{
+    padding-right:10px;
+  }
+  &_20{
+    padding: 20px;
+  }
+  &_t_20{
+    padding-top:20px;
+  }
+  &_b_20{
+    padding-bottom:20px;
+  }
+  &_l_20{
+    padding-left:20px;
+  }
+  &_r_20{
+    padding-right:20px;
+  }
+}
+.m{
+  &_10{
+    margin: 10px;
+  }
+  &_t_10{
+    margin-top:10px;
+  }
+  &_b_10{
+    margin-bottom:10px;
+  }
+  &_l_10{
+    margin-left:10px;
+  }
+  &_r_10{
+    margin-right:10px;
+  }
+  &_20{
+    margin: 20px;
+  }
+  &_t_20{
+    margin-top:20px;
+  }
+  &_b_20{
+    margin-bottom:20px;
+  }
+  &_l_20{
+    margin-left:20px;
+  }
+  &_r_20{
+    margin-right:20px;
+  }
+}
+
+//form border
+.border{
+  border: 1px solid rgba(94, 94, 94, 0.3);
+  border-radius: 12px;
+}
+.pointer{
+  cursor: pointer;
+}
+// text color 
 .red-clr{
   color: var(--red-clr);
+}
+.dark-blue-clr{
+  color: var(--dark-blue-clr);
+}
+.gray-400{
+  color: var(--gray-400);
+}
+.text-white{
+  color: #fff;
+}
+.w{
+  &_fill{
+    width: 100%;
+  }
 }
 .hidden{
   overflow: hidden;
@@ -716,4 +824,13 @@ cursor: pointer;
 }
 body.stickyHeader footer{
   display: none;
+}
+.mat-focused{
+  .mdc-notched-outline{
+    
+  }
+}
+
+.input-control{
+  width: 100%;
 }

@@ -8,6 +8,7 @@ import { DashboardComponent } from './layouts/admin/dashboard/dashboard.componen
 import { EventsComponent } from './layouts/admin/events/events.component';
 import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
 import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
+import { CreateEventComponent } from './layouts/admin/create-event/create-event.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
     component:AdminPanelComponent,
     children : [
         { path: 'dashboard', component: DashboardComponent },
-        { path: 'events', component: EventsComponent },  
+        { path: 'events', component: EventsComponent, },  
+        { path: 'events/new-events', component: CreateEventComponent },  
         { path: 'my-schedules', component: MySchedulesComponent },  
         { path: '', redirectTo:'events', pathMatch:"full" }
     ]

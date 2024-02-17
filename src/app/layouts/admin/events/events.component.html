@@ -4,11 +4,11 @@
             Events
         </aside>
         <aside>
-            <button mat-raised-button class="btn-darkblue" color="primary">+
+            <button mat-raised-button class="btn-darkblue" color="primary" routerLink="/admin-panel/events/new-events">+
                 New Event</button>
         </aside>
     </section>
-    <section class="event-table-block">
+    <section class="event-table-block border">
         <mat-form-field appearance="outline" class="search-block">
             <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Search..." #input>
             <span matTextPrefix>
