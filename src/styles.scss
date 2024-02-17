@@ -95,7 +95,6 @@ video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -675,4 +674,46 @@ cursor: pointer;
   margin-top: 15px;
   height: 40px;
 }
+}
+
+
+.mat-table-ft-fw{
+  thead{
+    background-color: #F7F8FE;
+  }
+  th{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    color: #00063A;
+  }
+  td{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    color: #00063A;
+    &.td-action{
+      width: 140px;
+    }
+    .action-block{
+      svg{
+        width: auto;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.btn-darkblue{
+  &.mat-mdc-raised-button.mat-primary{
+    background-color: #00063A;
+  }
+}
+.mdc-notched-outline{
+  div{
+
+  }
+}
+body.stickyHeader footer{
+  display: none;
 }

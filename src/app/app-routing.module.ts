@@ -42,7 +42,7 @@ const routes: Routes = [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'events', component: EventsComponent },  
         { path: 'my-schedules', component: MySchedulesComponent },  
-        { path: '', redirectTo:'dashboard', pathMatch:"full" }
+        { path: '', redirectTo:'events', pathMatch:"full" }
     ]
   },
 ];

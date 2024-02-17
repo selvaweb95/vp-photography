@@ -25,6 +25,9 @@ import { DashboardComponent } from './layouts/admin/dashboard/dashboard.componen
 import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
 import { EventsComponent } from './layouts/admin/events/events.component';
 import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule} from '@angular/material/sort';
+import { MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +50,14 @@ import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
     GalleryModule,
     LightboxModule,
     MatSlideToggleModule,
-    MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule
+    MatFormFieldModule, 
+    MatInputModule, 
+    FormsModule, 
+    MatButtonModule, 
+    MatIconModule,
+    MatTableModule, 
+    MatSortModule, 
+    MatPaginatorModule
   ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent]
