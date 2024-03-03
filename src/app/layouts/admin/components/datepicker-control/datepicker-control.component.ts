@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
 @Component({
@@ -9,8 +9,13 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 })
 export class DatepickerControlComponent {
   @Input() iLabel!:string;
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
+  @Output() selectedDate = new EventEmitter<string>();
+  // range = new FormGroup({
+  //   start: new FormControl<Date | null>(null),
+  //   end: new FormControl<Date | null>(null),
+  // });
+  date = ""
+  emitDate(){
+    this.selectedDate.emit(this.date)
+  }
 }

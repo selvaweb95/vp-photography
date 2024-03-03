@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginserviceService } from 'src/app/services/loginService/loginservice.service';
 
 @Component({
   selector: 'app-login',
@@ -7,15 +8,29 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginInput={
-    phoneNumber:'',
+  isOtpSent:boolean=false
+  phoneNumber:string="";
+  checkPhone:boolean=false
 
+  constructor(private router: Router,private login:LoginserviceService){}
+  sendOtp(){
+    if(this.phoneNumber == null || this.phoneNumber == ""){
+      this.checkPhone = true
+    } else {
+      this.login.SendOtp("/sendOTP",this.phoneNumber).subscribe(data=> console.log(data))
+      this.isOtpSent = true
+    }
   }
-  constructor(private router: Router){}
-  navgator(){
-    console.log(this.loginInput.phoneNumber);
+  checkNumber() {
+    if (String(this.phoneNumber).length > 10) {
+      this.phoneNumber= String(Math.floor(parseInt(this.phoneNumber)/10));
+    } 
     
-    if(this.loginInput.phoneNumber == null || this.loginInput.phoneNumber == ''){
+}
+ submitOtp(){
+    console.log(this.phoneNumber);
+    
+    if(this.phoneNumber == null || this.phoneNumber == ""){
       this.router.navigateByUrl('/select-photos');
     }
     else{
