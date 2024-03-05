@@ -17,6 +17,6 @@ export class LoginserviceService {
     return this.http.post(this.baseUrl+url,payload)
   }
   createEvent(payload:any){
-    return this.http.post(this.baseUrl+"/createEvent",payload)
+    return this.http.post(this.baseUrl+"/api/adminmanagement/AddCustomer",payload)
   }
 }

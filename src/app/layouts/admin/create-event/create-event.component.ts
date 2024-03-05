@@ -21,6 +21,18 @@ export class CreateEventComponent {
 
   welcomeImage:any;
   url:any = "";
+  eventValidation = {
+    isCustomerName : false,
+    isCustomerFullName : false,
+    isCustomerEmail : false,
+    isEventType: false,
+    isEventDate: false,
+    isCustomerPhoneNumber : false,
+    isAlbumValidTill : false,
+    isAlbumLimit: false,
+    isCustomerWelcomeImage: false,
+    isEventList : false
+  }
 
   eventDetails={
     customerName : "",
@@ -35,20 +47,84 @@ export class CreateEventComponent {
     eventList:[
       {
         eventName:"",
-        photos:[],
-        isAdded:false
+        photos:[{name:"",file:""}],
+        isAdded:false,
+        isValid:false
       }
     ]
   }
 
-  addEventName(event:any){
-    console.log(event);
+  validateEvent(){
+    this.eventValidation = {
+      isCustomerName : false,
+      isCustomerFullName : false,
+      isCustomerEmail : false,
+      isEventType: false,
+      isEventDate: false,
+      isCustomerPhoneNumber : false,
+      isAlbumValidTill : false,
+      isAlbumLimit: false,
+      isCustomerWelcomeImage: false,
+      isEventList : false
+    }
+    switch (true) {
+      case this.eventDetails.customerName=="" :
+          this.eventValidation.isCustomerName = true
+     
+      case this.eventDetails.customerFullName=="" :
+          this.eventValidation.isCustomerFullName = true
+          
+      case this.eventDetails.customerEmail=="" :
+          this.eventValidation.isCustomerEmail = true  
+          
+      // case this.eventDetails.eventType=="" :
+      //     this.eventValidation.isEventType = true
+      //     return false
+      case this.eventDetails.eventDate=="" :
+          this.eventValidation.isEventDate = true
+          
+      case this.eventDetails.albumValidTill== "" :
+          this.eventValidation.isAlbumValidTill = true
+          
+      case this.eventDetails.albumLimit=="" :
+          this.eventValidation.isAlbumLimit = true
+          
+      case this.eventDetails.customerWelcomeImage=="" :
+          this.eventValidation.isCustomerWelcomeImage = true;
+          
+    }
+      
+
+      for (let index = 0; index < this.eventDetails.eventList.length; index++) {   
+        if (this.eventDetails.eventList[index].eventName == "") {
+          this.eventValidation.isEventList = true
+          return false
+        } else { this.eventValidation.isEventList = false }
+      }
+      const hasValue = (obj:any, value:any) => Object.values(obj).includes(value);
+      if (hasValue(this.eventValidation,true)) {
+        return false
+      }
+      return true
     
   }
 
   updateNewEvent(index:any){
-    this.openDialog(index);
-    this.eventDetails.eventList[index].isAdded = true;
+    if (this.eventDetails.eventList[index].eventName == "") {
+      this.eventDetails.eventList[index].isValid = true
+    } else {  
+      const dialogRef = this.dialog.open(DialogUploadImageComponent, {
+        height: '400px',
+        width: '600px',
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed',result);
+        this.eventDetails.eventList[index].photos = result
+        this.eventDetails.eventList[index].isAdded = true;
+        this.eventDetails.eventList[index].isValid = false
+      });
+    }
   }
 
   removeEvent(index:any){
@@ -59,9 +135,9 @@ export class CreateEventComponent {
     this.eventDetails.eventList.push({
       eventName:"",
       photos:[],
-      isAdded:false
+      isAdded:false,
+      isValid:false
     })
-    console.log(this.eventDetails);
   }
 
   checkimage(event:any){
@@ -74,20 +150,6 @@ export class CreateEventComponent {
       }
       reader.readAsDataURL(event.target.files[0]);
     }
-  }
-
-  openDialog(index:any): void {
-    const dialogRef = this.dialog.open(DialogUploadImageComponent, {
-      height: '400px',
-      width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
-      // this.animal = result;
-      this.eventDetails.eventList[index].photos = result
-
-    });
   }
 
   RemoveWelcomeImage()
@@ -103,11 +165,16 @@ export class CreateEventComponent {
   }
 
   createEvent(){
-    console.log(this.eventDetails);
-    this.http.createEvent(this.eventDetails).subscribe((res)=>{
-      console.log(res);
-      
-    })
+    console.log(this.eventDetails,this.eventValidation);
+    console.log(typeof(this.eventDetails.albumValidTill));
+    console.log(this.validateEvent());
+    
+    if (this.validateEvent()) {
+      this.http.createEvent(this.eventDetails).subscribe((res)=>{
+        console.log(res);
+        
+      }) 
+    }
   }
 
 }

@@ -19,6 +19,9 @@
       <mat-error>Invalid end date</mat-error>
     } -->
   </mat-form-field>
+  @if (isError) {
+    <span>Field is Required</span>
+    }
   
   <!-- <p>Selected range: {{range.value | json}}</p> -->
   

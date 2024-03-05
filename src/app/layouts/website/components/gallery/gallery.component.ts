@@ -16,7 +16,8 @@ export class GalleryComponent {
   items: GalleryItem[] = [];
   @Input() favorite!:boolean;
   imageData = data;
-  selected :any;
+  selectedImage :Array<any>=[];
+  selectedFav :Array<any>=[];
   constructor(public gallery: Gallery, public lightbox: Lightbox) {}
 
   ngOnInit() {
@@ -42,11 +43,25 @@ export class GalleryComponent {
     lightboxRef.load(this.items);
   }
 
-  select(item:any) {
-    this.selected = item; 
+  selectImage(item:any) {
+    if (this.selectedImage.includes(item)) {
+      this.selectedImage.splice(this.selectedImage.findIndex(r=>r == item),1)
+    } else {
+      this.selectedImage.push(item); 
+    }
 };
-isActive(item:any) {
-    return this.selected === item;
+selectFav(item:any) {
+  if (this.selectedFav.includes(item)) {
+    this.selectedFav.splice(this.selectedFav.findIndex(r=> r == item),1)
+  } else {
+    this.selectedFav.push(item); 
+  }
+};
+isActiveImage(item:any) {
+    return this.selectedImage.includes(item) ;
+};
+isActiveFav(item:any) {
+    return this.selectedFav.includes(item) ;
 };
 }
 

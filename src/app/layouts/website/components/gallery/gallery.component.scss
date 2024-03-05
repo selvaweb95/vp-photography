@@ -42,11 +42,17 @@
                             }
                         }
                         
-                        &:hover{
+                        &.activeImage{
                             svg{
                                 path{
                                     fill: rgb(226, 139, 0);
-                                    stroke: rgb(226, 139, 0);
+                                }
+                            }
+                        }
+                        &.activeFav{
+                            svg{
+                                path{
+                                    fill: rgb(226, 139, 0);
                                 }
                             }
                         }

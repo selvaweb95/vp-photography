@@ -17,6 +17,7 @@ interface Car {
 })
 export class SelectControlComponent {
   @Input() iLabel!:string;
+  @Input() isError!:boolean;
   selectedValue!: string;
   selectedCar!: string;
 

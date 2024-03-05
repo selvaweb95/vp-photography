@@ -30,11 +30,11 @@ export class LoginComponent {
  submitOtp(){
     console.log(this.phoneNumber);
     
-    if(this.phoneNumber == null || this.phoneNumber == ""){
-      this.router.navigateByUrl('/select-photos');
-    }
-    else{
+    // if(this.phoneNumber == null || this.phoneNumber == ""){
+      // this.router.navigateByUrl('/select-photos');
+    // }
+    // else{
       this.router.navigateByUrl('/admin-panel');
-    }
+    // }
   }
 }

@@ -18,9 +18,9 @@
     <section class="new-event-block border p_20 m_t_20">
         <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Event Info</h2>
         <section class="d_grid d_grid_3">
-            <input-control [(ngModel)]="eventDetails.customerName" ngDefaultControl [iLabel]="'Customer Name'"></input-control>
-            <select-control [(ngModel)]="eventDetails.eventType" ngDefaultControl [iLabel]="'Event Type'"></select-control>
-            <datepicker-control [(ngModel)]="eventDetails.eventDate" (selectedDate)="addEventDate($event)" ngDefaultControl [iLabel]="'Enter a Start date to End date range'"></datepicker-control>
+            <input-control [(ngModel)]="eventDetails.customerName" ngDefaultControl [isError]="eventValidation.isCustomerName" [iLabel]="'Customer Name'"></input-control>
+            <select-control [(ngModel)]="eventDetails.eventType" ngDefaultControl [isError]="eventValidation.isEventType" [iLabel]="'Event Type'"></select-control>
+            <datepicker-control [(ngModel)]="eventDetails.eventDate" (selectedDate)="addEventDate($event)" [isError]="eventValidation.isEventDate" ngDefaultControl [iLabel]="'Enter a Start date to End date range'"></datepicker-control>
         </section>
         <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Welcome Image</h2>
         <section class="welcome-img p_20">
@@ -291,6 +291,7 @@
                     </span>
                     <img [src]="url" class="img-responsive" alt="">
                 </div>
+                <span *ngIf="eventValidation.isCustomerWelcomeImage" >Field is Required</span>
             </aside>
 
         </section>
@@ -345,7 +346,8 @@
                       </button>
                 </aside>
             </section>
-            <input-control *ngIf="!event.isAdded"  [(ngModel)]="event.eventName" ngDefaultControl [iLabel]="'Event Name'"></input-control>
+            <input-control *ngIf="!event.isAdded" [isError]="eventValidation.isCustomerName" [(ngModel)]="event.eventName" ngDefaultControl [iLabel]="'Event Name'"></input-control>
+            <span *ngIf="event.isValid">Field is Required</span>
             <aside *ngIf="!event.isAdded"  class="upload-folder d_flex d_flex_column  d_jc_center d_ai_center">
                 <!-- https://medium.com/@tarekabdelkhalek/how-to-create-a-drag-and-drop-file-uploading-in-angular-78d9eba0b854 -->
                 <!-- <input class="file-upload" title="" type="file" name="" id=""> -->
@@ -359,16 +361,16 @@
         </button>
         <h2 class="fs_14 fw_600 p_t_20 p_b_10 ">Image Limit</h2>
         <section class="event-list-block d_grid d_grid_3 p_t_10">
-            <input-control [(ngModel)]="eventDetails.albumLimit" ngDefaultControl [iLabel]="'Max Image Limit'"></input-control>
+            <input-control [(ngModel)]="eventDetails.albumLimit" type="number" [isError]="eventValidation.isAlbumLimit" ngDefaultControl [iLabel]="'Max Image Limit'"></input-control>
         </section>
     </section>
     <section class=" border p_20 m_t_20">
         <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Customer Info</h2>
         <section class="d_grid d_grid_3">
-            <input-control [(ngModel)]="eventDetails.customerFullName" ngDefaultControl [iLabel]="'Full Name'"></input-control>
-            <input-control [(ngModel)]="eventDetails.customerEmail" ngDefaultControl [iLabel]="'Email ID'"></input-control>
+            <input-control [(ngModel)]="eventDetails.customerFullName" [isError]="eventValidation.isCustomerFullName" ngDefaultControl [iLabel]="'Full Name'"></input-control>
+            <input-control [(ngModel)]="eventDetails.customerEmail" ngDefaultControl [isError]="eventValidation.isCustomerEmail" [iLabel]="'Email ID'"></input-control>
             <!-- <input-control [(ngModel)]="eventDetails.customerEmail" ngDefaultControl [iLabel]="'Contact Number'"></input-control> -->
-            <datepicker-control [(ngModel)]="eventDetails.albumValidTill" (selectedDate)="addValidTillDate($event)"  [iLabel]="'Valid Till'"></datepicker-control>
+            <datepicker-control [(ngModel)]="eventDetails.albumValidTill" (selectedDate)="addValidTillDate($event)" [isError]="eventValidation.isAlbumValidTill" [iLabel]="'Valid Till'"></datepicker-control>
         </section>
         <aside class="d_flex d_jc_end gap_15 m_t_20">
             <button mat-raised-button>

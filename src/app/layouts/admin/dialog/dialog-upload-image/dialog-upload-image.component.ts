@@ -11,37 +11,32 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogUploadImageComponent {
   constructor(private dialogRef: MatDialogRef<DialogUploadImageComponent>){ }
+  isImage = false
   createEvent(){
-    console.log();
-    this.dialogRef.close(this.url);
+    if (this.url[0].name == "") {
+      this.isImage = true
+    } else {
+      this.dialogRef.close(this.url);
+    }
   }
   welcomeImage:any;
   url: Array<any> = [];
   checkimage(event:any){ 
-    // if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
-    //   reader.onload = (event:any) => {
-    //       this.url.push(event.target.result);
-    //   }
-    //   for (let index = 0; index < event.target.files.length; index++) {
-    //     setTimeout(() => {
-    //       reader.readAsDataURL(event.target.files[index]);
-    //     }, 1000);
-    //   }
-    // }
-
+      console.log(event.target.files);
+      
      let file;
        for (let i=0; i<event.target.files.length ; i++){
+        this.url.push({name:"",file:""})
+        this.url[i].name=event.target.files[i].name;
             let reader = new FileReader();
             file = event.target.files [i];
             reader.onload = (file:any) => {
-              this.url[i]=reader.result;
-              console.log(this.url);
-              
+              this.url[i].file=reader.result;
              }
             reader.readAsDataURL(file)
-        }
-    
-    
+          }
+      this.isImage = false
+
   }
 }
