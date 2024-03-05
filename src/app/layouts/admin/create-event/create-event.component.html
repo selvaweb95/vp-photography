@@ -336,8 +336,14 @@
                     </span>
                     {{event.eventName}}
                 </aside>
-                <span>Edit</span>
                 <aside>
+                    <button (click)="editEventList(index)" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                        <mat-icon>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.92 0.872879C11.4801 0.325688 12.2334 0.0213696 13.0164 0.0259294C13.7994 0.0304892 14.549 0.343559 15.1027 0.897236C15.6564 1.45091 15.9694 2.20055 15.974 2.98355C15.9785 3.76656 15.6742 4.51979 15.127 5.07988L14.458 5.74888L10.251 1.54188L10.92 0.872879ZM9.54403 2.24988L1.54503 10.2489C1.21771 10.5766 0.990516 10.9907 0.890033 11.4429L0.012033 15.3929C-0.00633093 15.4751 -0.0036392 15.5606 0.0198586 15.6414C0.0433565 15.7223 0.086899 15.7959 0.146447 15.8555C0.205994 15.915 0.279617 15.9586 0.360485 15.9821C0.441354 16.0056 0.526847 16.0082 0.609033 15.9899L4.53503 15.1169C5.00247 15.0128 5.43054 14.7776 5.76903 14.4389L13.751 6.45688L9.54403 2.24988Z" fill="#00063A"/>
+                                </svg>
+                        </mat-icon>
+                      </button>
                     <button (click)="removeEvent(index)" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
                         <mat-icon>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

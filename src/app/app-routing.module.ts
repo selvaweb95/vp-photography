@@ -9,6 +9,8 @@ import { EventsComponent } from './layouts/admin/events/events.component';
 import { AdminPanelComponent } from './layouts/admin/admin-panel.component';
 import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.component';
 import { CreateEventComponent } from './layouts/admin/create-event/create-event.component';
+import { authGuardGuard } from './services/guard/auth-guard.guard';
+import { adminGuard } from './services/guard/admin.guard';
 
 const routes: Routes = [
   {
@@ -30,15 +32,18 @@ const routes: Routes = [
   },
   {
     path:'user-photos',
+    canActivate:[authGuardGuard],
     component:UserPhotosComponent
   },
   {
     path:'select-photos',
+    canActivate:[authGuardGuard],
     component:SelectListComponent
   },
   {
     path:'admin-panel',
     component:AdminPanelComponent,
+    canActivateChild:[adminGuard],
     children : [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'events', component: EventsComponent, },  
@@ -47,6 +52,10 @@ const routes: Routes = [
         { path: '', redirectTo:'events', pathMatch:"full" }
     ]
   },
+  {
+    path:'**',
+    component:HomeComponent
+  }
 ];
 
 @NgModule({

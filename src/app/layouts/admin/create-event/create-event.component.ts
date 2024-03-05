@@ -109,6 +109,21 @@ export class CreateEventComponent {
     
   }
 
+  editEventList(index:any){
+    const dialogRef = this.dialog.open(DialogUploadImageComponent, {
+      height: '70%',
+      width: '75%',
+      data: this.eventDetails.eventList[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);
+      this.eventDetails.eventList[index].photos = result
+      this.eventDetails.eventList[index].isAdded = true;
+      this.eventDetails.eventList[index].isValid = false
+    });
+  }
+
   updateNewEvent(index:any){
     if (this.eventDetails.eventList[index].eventName == "") {
       this.eventDetails.eventList[index].isValid = true

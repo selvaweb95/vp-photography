@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-upload-image',
@@ -10,8 +11,18 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './dialog-upload-image.component.scss'
 })
 export class DialogUploadImageComponent {
-  constructor(private dialogRef: MatDialogRef<DialogUploadImageComponent>){ }
+  constructor(private dialogRef: MatDialogRef<DialogUploadImageComponent>,@Inject(MAT_DIALOG_DATA) public data: any){ 
+
+      if (data) {
+        console.log(data);
+        this.url = data.photos
+      }
+  }
+
   isImage = false
+  removeImage(data:any){
+    this.url.splice(this.url.indexOf(data),1)
+  }
   createEvent(){
     if (this.url[0].name == "") {
       this.isImage = true
@@ -27,12 +38,10 @@ export class DialogUploadImageComponent {
       
      let file;
        for (let i=0; i<event.target.files.length ; i++){
-        this.url.push({name:"",file:""})
-        this.url[i].name=event.target.files[i].name;
             let reader = new FileReader();
             file = event.target.files [i];
             reader.onload = (file:any) => {
-              this.url[i].file=reader.result;
+              this.url.push({name:event.target.files[i].name,file:reader.result }) 
              }
             reader.readAsDataURL(file)
           }

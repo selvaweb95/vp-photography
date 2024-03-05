@@ -26,35 +26,35 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="image">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-                    <td mat-cell *matCellDef="let row"> <img src="../../../../assets/images/Thumbnail.jpg" alt=""> </td>
+                    <td mat-cell *matCellDef="let row"> <img [src]="row.welcomeImage" width="70px" height="70px" alt=""> </td>
                 </ng-container>
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="CustomerName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Customer Name </b></th>
-                    <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                    <td mat-cell *matCellDef="let row"> {{row.customerName}}</td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="PhoneNumber">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Phone Number </b></th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                 </ng-container>
 
                 <!-- Fruit Column -->
                 <ng-container matColumnDef="EventType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Event Type </b></th>
-                    <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.eventType}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Createdat">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Created at </b></th>
-                    <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Createdby">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Created by </b> </th>
-                    <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.createdBy}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Action">

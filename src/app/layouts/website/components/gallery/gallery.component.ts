@@ -7,6 +7,7 @@ import {
   Gallery,
 } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
+import { SharedService } from 'src/app/services/shared/shared.service';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -18,11 +19,14 @@ export class GalleryComponent {
   imageData = data;
   selectedImage :Array<any>=[];
   selectedFav :Array<any>=[];
-  constructor(public gallery: Gallery, public lightbox: Lightbox) {}
+  constructor(public gallery: Gallery, public lightbox: Lightbox,private service:SharedService) {}
 
   ngOnInit() {
     /** Basic Gallery Example */
-
+    this.service.getCoustomerDetails().subscribe((res:any)=>{
+      console.log(res);
+      
+    })
     // Creat gallery items
     this.items = this.imageData.map(
       (item) => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })

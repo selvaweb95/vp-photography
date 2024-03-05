@@ -20,5 +20,17 @@ export class LoginserviceService {
   public getToken(): any {
     return localStorage.getItem('token');
   }
+
+  public isAuthenticated(){
+    if (localStorage.getItem('token')) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  public logout(){
+    localStorage.removeItem('token')
+  }
   
 }

@@ -20,7 +20,6 @@ export class LoginComponent {
     
   }
   sendOtp(){
-    this.router.navigateByUrl('/admin-panel');
     if(this.email == null || this.email == ""){
       this.checkPhone = true
     } else {
@@ -43,16 +42,18 @@ export class LoginComponent {
     this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otp}`).subscribe((responce:any)=> {
       if (responce.isSuccess) {
         localStorage.setItem('token',responce.userToken.split(":")[1])
-        this.router.navigateByUrl('/admin-panel');
-        // switch (responce.role) {
-        //   case 1 :
-        //     this.router.navigateByUrl('/admin-panel');
-        //     break;
+        localStorage.setItem('role',responce.userRole) 
+        localStorage.setItem('id',responce.userId) 
+        // this.router.navigateByUrl('/admin-panel');
+        switch (responce.userRole) {
+          case "1" :
+            this.router.navigateByUrl('/admin-panel');
+            break;
           
-        //   case 2:
-        //     this.router.navigateByUrl('/select-photos');
-        //     break;
-        // }
+          case "2":
+            this.router.navigateByUrl('/select-photos');
+            break;
+        }
       }
     })
     // if(this.phoneNumber == null || this.phoneNumber == ""){
