@@ -3,6 +3,9 @@
     .welcome-img {
       background-color: #f5f5f5;
       border-radius: 15px;
+      &.error{
+        border: 1px solid red;
+      }
       .browse-img {
         position: relative;
         .welcome-file-upload {

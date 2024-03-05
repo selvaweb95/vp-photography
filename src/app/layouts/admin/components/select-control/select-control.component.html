@@ -5,7 +5,5 @@
         <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
       }
     </mat-select>
+    <mat-hint class="error" *ngIf="isError">Field is <strong>required*</strong></mat-hint>
   </mat-form-field>
-  @if (isError) {
-    <span>Field is Required</span>
-    }

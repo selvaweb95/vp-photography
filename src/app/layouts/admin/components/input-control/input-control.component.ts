@@ -7,5 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class InputControlComponent {
   @Input() iLabel!:string;
-  @Input() isError!:boolean;
+  @Input() iType!:string;
+  @Input() isError!:boolean; 
+  @Input() isEmpty!:boolean; 
 }

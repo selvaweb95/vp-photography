@@ -9,7 +9,7 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
    -->
    <input matInput [(ngModel)]="date" (dateChange)="emitDate()" [matDatepicker]="picker">
-   <mat-hint>MM/DD/YYYY</mat-hint>
+   <mat-hint class="error" *ngIf="isError">Field is <strong>required*</strong></mat-hint>
    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
    <mat-datepicker #picker></mat-datepicker>
     <!-- @if (range.controls.start.hasError('matStartDateInvalid')) {
@@ -19,9 +19,6 @@
       <mat-error>Invalid end date</mat-error>
     } -->
   </mat-form-field>
-  @if (isError) {
-    <span>Field is Required</span>
-    }
   
   <!-- <p>Selected range: {{range.value | json}}</p> -->
   
