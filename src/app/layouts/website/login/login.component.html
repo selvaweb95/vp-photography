@@ -7,11 +7,11 @@
         <div>
             <form action="">
                 <div class="form-group" *ngIf="!isOtpSent">
-                    <input type="email" name="phoneNumber" maxlength="10" (keyup)="checkNumber()" [(ngModel)]="phoneNumber" required placeholder="Enter your Email">
+                    <input type="email" name="phoneNumber"[(ngModel)]="email" required placeholder="Enter your Email">
                 </div>
                 <span *ngIf="checkPhone">Field is required</span>
                 <div class="form-group" *ngIf="isOtpSent">
-                    <input type="text" placeholder="Enter OTP">
+                    <input type="number" name="otp" [(ngModel)]="otp" (change)="checkOtp()" required placeholder="Enter OTP">
                 </div>
                 <button class="fs_16 fw_700 text-center form-btn" *ngIf="!isOtpSent" (click)="sendOtp()" >
                     Send OTP

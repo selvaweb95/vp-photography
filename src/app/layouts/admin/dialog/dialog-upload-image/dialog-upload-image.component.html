@@ -1,6 +1,6 @@
-<h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Welcome Image</h2>
         <section class="welcome-img p_20">
             <div class="browse-img d_flex d_flex_column gap_15 d_jc_center d_ai_center">
+                <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Upload Image</h2>
                 <input class="welcome-file-upload" multiple title="" type="file" name="" accept="image/*" ngDefaultControl (change)="checkimage($event)" id="">
                 <span>
                     <svg width="158" height="158" viewBox="0 0 158 158" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -252,24 +252,30 @@
                 </span>
                 <p class="fs_14 fw_600 gray-400">Click or <span class="dark-blue-clr">Browse</span> to upload image</p>
             </div>
-            <aside *ngFor="let image of url;index as index" class="img-wrapper d_flex  d_jc_center d_ai_center">
-                <div  class="img-block d_flex d_flex_column gap_15 d_jc_center d_ai_center">
-                    <span >
-                        <svg *ngIf="image.file != ''" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                                fill="#292D32" />
-                            <path d="M9.16992 14.8299L14.8299 9.16992" stroke="white" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M14.8299 14.8299L9.16992 9.16992" stroke="white" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                    <img [src]="image.file" class="img-responsive" alt="">
-                </div>
-                <span *ngIf="isImage">Field is Required</span>
-            </aside>
-                <aside class="d_flex d_jc_end btn gap_15 m_t_20">
-                    <button mat-raised-button class="btn-darkblue" (click)="createEvent()" color="primary" >Upload Image</button>
+            <div class="gap_10 m_t_20 uploadImage"> 
+                <aside *ngFor="let image of url;index as index" class="img-wrapper d_flex  d_jc_center d_ai_center">
+                    <div  class="img-block d_flex d_flex_column gap_15 d_jc_center d_ai_center">
+                        <span >
+                            <svg *ngIf="image.file != ''" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                                    fill="#292D32" />
+                                <path d="M9.16992 14.8299L14.8299 9.16992" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M14.8299 14.8299L9.16992 9.16992" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <img [src]="image.file" class="img-responsive" alt="">
+                    </div>
+                    <span *ngIf="isImage">Field is Required</span>
                 </aside>
+            </div>
+                <aside class="d_flex d_jc_end btn gap_15 m_t_20">
+                    <!-- <button mat-raised-button class="btn-darkblue"  color="primary" ></button> -->
+                    <button (click)="createEvent()" mat-raised-button class="add-new-event btn-darkblue" color="primary">
+                        <span class="fs_14 fw_500 text-white">Upload Image</span>
+                    </button>
+                </aside>
+                
         </section>

@@ -9,32 +9,57 @@ import { LoginserviceService } from 'src/app/services/loginService/loginservice.
 })
 export class LoginComponent {
   isOtpSent:boolean=false
-  phoneNumber:string="";
+  email:string="";
+  otpEmail:string =""
+  otp: number=0
   checkPhone:boolean=false
 
   constructor(private router: Router,private login:LoginserviceService){}
+  checkOtp(){
+    console.log(this.otpEmail);
+    
+  }
   sendOtp(){
-    if(this.phoneNumber == null || this.phoneNumber == ""){
+    this.router.navigateByUrl('/admin-panel');
+    if(this.email == null || this.email == ""){
       this.checkPhone = true
     } else {
-      this.login.SendOtp("/sendOTP",this.phoneNumber).subscribe(data=> console.log(data))
-      this.isOtpSent = true
+      this.login.postWithQuery(`/api/auth/GetOTPMail?email=${this.email}`).subscribe((responce:any)=>
+      {
+        if (responce.isSucceeded) {
+          this.isOtpSent = true
+        }
+      })
     }
   }
-  checkNumber() {
-    if (String(this.phoneNumber).length > 10) {
-      this.phoneNumber= String(Math.floor(parseInt(this.phoneNumber)/10));
-    } 
+  // checkNumber() {
+  //   if (String(this.phoneNumber).length > 10) {
+  //     this.phoneNumber= String(Math.floor(parseInt(this.phoneNumber)/10));
+  //   } 
     
-}
+// }
  submitOtp(){
-    console.log(this.phoneNumber);
-    
+    console.log(this.otp);
+    this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otp}`).subscribe((responce:any)=> {
+      if (responce.isSuccess) {
+        localStorage.setItem('token',responce.userToken.split(":")[1])
+        this.router.navigateByUrl('/admin-panel');
+        // switch (responce.role) {
+        //   case 1 :
+        //     this.router.navigateByUrl('/admin-panel');
+        //     break;
+          
+        //   case 2:
+        //     this.router.navigateByUrl('/select-photos');
+        //     break;
+        // }
+      }
+    })
     // if(this.phoneNumber == null || this.phoneNumber == ""){
       // this.router.navigateByUrl('/select-photos');
     // }
     // else{
-      this.router.navigateByUrl('/admin-panel');
+      // this.router.navigateByUrl('/admin-panel');
     // }
   }
 }

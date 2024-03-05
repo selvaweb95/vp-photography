@@ -9,7 +9,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { DialogUploadImageComponent } from '../dialog/dialog-upload-image/dialog-upload-image.component';
-import { LoginserviceService } from 'src/app/services/loginService/loginservice.service';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-create-event',
@@ -17,7 +17,7 @@ import { LoginserviceService } from 'src/app/services/loginService/loginservice.
   styleUrl: './create-event.component.scss'
 })
 export class CreateEventComponent {
-  constructor(public dialog: MatDialog,private http: LoginserviceService) {}
+  constructor(public dialog: MatDialog,private http: SharedService) {}
 
   welcomeImage:any;
   url:any = "";
@@ -114,8 +114,8 @@ export class CreateEventComponent {
       this.eventDetails.eventList[index].isValid = true
     } else {  
       const dialogRef = this.dialog.open(DialogUploadImageComponent, {
-        height: '400px',
-        width: '600px',
+        height: '70%',
+        width: '75%',
       });
   
       dialogRef.afterClosed().subscribe(result => {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,15 @@ export class LoginserviceService {
 
   constructor(private http: HttpClient ) {}
 
-  SendOtp(url:string,payload:any){
-    return this.http.post(this.baseUrl+url,payload)
+  public postWithQuery(url:string) : any{
+    return this.http.post(this.baseUrl+url,"")
   }
   submitOtp(url:string,payload:any){
     return this.http.post(this.baseUrl+url,payload)
   }
-  createEvent(payload:any){
-    return this.http.post(this.baseUrl+"/api/adminmanagement/AddCustomer",payload)
+
+  public getToken(): any {
+    return localStorage.getItem('token');
   }
+  
 }

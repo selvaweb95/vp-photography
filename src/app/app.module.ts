@@ -33,13 +33,14 @@ import { InputControlComponent } from './layouts/admin/components/input-control/
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { DialogUploadImageComponent } from './layouts/admin/dialog/dialog-upload-image/dialog-upload-image.component';
 import { CommonModule } from '@angular/common';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 export function momentAdapterFactory() {
   return adapterFactory(moment);
 };
@@ -86,7 +87,7 @@ export function momentAdapterFactory() {
     BrowserModule,
     CommonModule
   ],
-  providers: [provideAnimations()],
+  providers: [provideAnimations(),{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
