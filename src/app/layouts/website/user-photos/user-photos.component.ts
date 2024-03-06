@@ -15,10 +15,12 @@ export class UserPhotosComponent {
   welcomeImage!: string;
   coustomerName!:string;
   eventDate!:string;
+  FavouriteList:any
   activeEvent:any;
   constructor(private service:SharedService,private router: Router){
     if (router.getCurrentNavigation()?.extras.state?.['image']) {
       this.welcomeImage = router.getCurrentNavigation()?.extras.state?.['image'];
+      this.FavouriteList = router.getCurrentNavigation()?.extras.state?.['FavouriteList'];
     
     // this.service.getCoustomerDetails().subscribe((res:any)=>{
         this.coustomerName = router.getCurrentNavigation()?.extras.state?.['coustomerName']

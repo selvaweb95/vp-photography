@@ -17,6 +17,7 @@ export class GalleryComponent {
   items: GalleryItem[] = [];
   @Input() favorite!:boolean;
   @Input() eventList:any
+  @Input() FavouriteList:any
   imageData:any;
   selectedImage :Array<any>=[];
   selectedFav :Array<any>=[];
@@ -32,6 +33,13 @@ export class GalleryComponent {
       (item: { file: any; }) => new ImageItem({ src: item.file, thumb: item.file })
     );
     this.imageData=this.eventList?.photos
+    this.selectedFav =(this.FavouriteList);
+    for (let index = 0; index < this.FavouriteList.length; index++) {
+      this.selectedFav.push(this.FavouriteList[index].id)
+      
+    }
+    console.log(this.isActiveFav(this.FavouriteList[0]));
+    
     // this.favorite=
     /** Lightbox Example */
 
@@ -57,12 +65,12 @@ export class GalleryComponent {
       this.selectedImage.push(item); 
     }
 };
-selectFav(item:any) {
+ selectFav(item:any) {
   if (this.selectedFav.includes(item)) {
-    this.selectedFav.splice(this.selectedFav.findIndex(r=> r == item),1)
+    this.selectedFav.splice(this.selectedFav.findIndex(r=> r == item.id),1)
     this.service.removeFav(item).subscribe((data:any)=>{console.log(data)})
   } else {
-    this.selectedFav.push(item); 
+    this.selectedFav.push(item.id); 
     this.service.addToFav(item).subscribe((data:any)=>{console.log(data)})
   }
 };
@@ -70,6 +78,10 @@ isActiveImage(item:any) {
     return this.selectedImage.includes(item) ;
 };
 isActiveFav(item:any) {
-    return this.selectedFav.includes(item) ;
+  console.log(item);
+  
+  console.log(this.selectedFav.includes(item.id));
+  
+    return this.selectedFav.includes(item.id) ;
 };
 }
