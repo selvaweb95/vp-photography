@@ -6,14 +6,16 @@ import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
   styleUrl: './tabs.component.scss'
 })
 export class TabsComponent implements OnInit{
-  @Input() tabsArray:string[] =[];
+  @Input() tabsArray:any[] =[];
   @Output() onTabChange = new EventEmitter<string>();
-  activatedTab:string= this.tabsArray[0];
+  activatedTab:string | undefined;
   constructor(){
     
   }
   ngOnInit(): void {
-    this.activatedTab= this.tabsArray[0];
+    console.log("this.activatedTab",this.tabsArray[0].eventName);
+    
+    this.activatedTab= this.tabsArray[0].eventName;
   }
   setTab(tabName:string){
     this.activatedTab=tabName;

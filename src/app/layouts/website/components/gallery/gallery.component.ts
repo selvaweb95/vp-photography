@@ -16,21 +16,22 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 export class GalleryComponent {
   items: GalleryItem[] = [];
   @Input() favorite!:boolean;
-  imageData = data;
+  @Input() eventList:any
+  imageData:any;
   selectedImage :Array<any>=[];
   selectedFav :Array<any>=[];
   constructor(public gallery: Gallery, public lightbox: Lightbox,private service:SharedService) {}
 
   ngOnInit() {
     /** Basic Gallery Example */
-    this.service.getCoustomerDetails().subscribe((res:any)=>{
-      console.log(res);
-      
-    })
+   
     // Creat gallery items
-    this.items = this.imageData.map(
-      (item) => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
+    console.log(this.eventList);
+    
+    this.items = this.eventList?.photos.map(
+      (item: { file: any; }) => new ImageItem({ src: item.file, thumb: item.file })
     );
+    this.imageData=this.eventList?.photos
     // this.favorite=
     /** Lightbox Example */
 
@@ -44,6 +45,8 @@ export class GalleryComponent {
     });
 
     // Load items into the lightbox gallery ref
+    console.log(this.items[0]);
+    
     lightboxRef.load(this.items);
   }
 
@@ -57,8 +60,10 @@ export class GalleryComponent {
 selectFav(item:any) {
   if (this.selectedFav.includes(item)) {
     this.selectedFav.splice(this.selectedFav.findIndex(r=> r == item),1)
+    this.service.removeFav(item).subscribe((data:any)=>{console.log(data)})
   } else {
     this.selectedFav.push(item); 
+    this.service.addToFav(item).subscribe((data:any)=>{console.log(data)})
   }
 };
 isActiveImage(item:any) {
@@ -68,95 +73,3 @@ isActiveFav(item:any) {
     return this.selectedFav.includes(item) ;
 };
 }
-
-
-const data = [
-  {
-    srcUrl: '../../../assets/images/gallery1.jpg',
-    previewUrl: '../../../assets/images/gallery1.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery2.jpg',
-    previewUrl: '../../../assets/images/gallery2.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery3.jpg',
-    previewUrl: '../../../assets/images/gallery3.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery4.jpg',
-    previewUrl: '../../../assets/images/gallery4.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery5.jpg',
-    previewUrl: '../../../assets/images/gallery5.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery6.jpg',
-    previewUrl: '../../../assets/images/gallery6.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery7.jpg',
-    previewUrl: '../../../assets/images/gallery7.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery8.jpg',
-    previewUrl: '../../../assets/images/gallery8.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery9.jpg',
-    previewUrl: '../../../assets/images/gallery9.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery10.jpg',
-    previewUrl: '../../../assets/images/gallery10.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery11.jpg',
-    previewUrl: '../../../assets/images/gallery11.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery12.jpg',
-    previewUrl: '../../../assets/images/gallery12.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery13.jpg',
-    previewUrl: '../../../assets/images/gallery13.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery14.jpg',
-    previewUrl: '../../../assets/images/gallery14.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery15.jpg',
-    previewUrl: '../../../assets/images/gallery15.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery16.jpg',
-    previewUrl: '../../../assets/images/gallery16.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery17.jpg',
-    previewUrl: '../../../assets/images/gallery17.jpg',
-  },
-  {
-    srcUrl: '../../../assets/images/gallery18.jpg',
-    previewUrl: '../../../assets/images/gallery18.jpg',
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-    previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-    previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-    previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-    previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-  },
-];

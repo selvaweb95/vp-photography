@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
 export interface UserData {
@@ -29,7 +30,7 @@ export class EventsComponent implements AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   event:any
-  constructor(private service:SharedService) {
+  constructor(private service:SharedService,private router:Router) {
     // Create 100 users
     // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     service.getAllEvent().subscribe((res:any)=>{
@@ -49,6 +50,11 @@ export class EventsComponent implements AfterViewInit{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  editEvent(id:string){
+    // 
+    this.router.navigate(['/admin-panel/events/new-events'],{ state: { id: id } })
   }
 
   applyFilter(event: Event) {

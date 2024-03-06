@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { DialogUploadImageComponent } from '../dialog/dialog-upload-image/dialog-upload-image.component';
 import { SharedService } from 'src/app/services/shared/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-event',
@@ -17,10 +18,19 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrl: './create-event.component.scss'
 })
 export class CreateEventComponent {
-  constructor(public dialog: MatDialog,private http: SharedService) {}
+  constructor(public dialog: MatDialog,private http: SharedService,router:Router) {
+    if (router.getCurrentNavigation()?.extras.state?.['id']) {
+      http.getCoustomerById(router.getCurrentNavigation()?.extras.state?.['id']).subscribe((res:any)=>{
+        if (res.isSucceeded) {
+          this.eventDetails=res.returnData
+          console.log(this.eventDetails);
+          
+        }
+      })
+    }
+  }
 
   welcomeImage:any;
-  url:any = "";
   eventValidation = {
     isCustomerName : false,
     isCustomerFullName : false,
@@ -35,6 +45,7 @@ export class CreateEventComponent {
   }
 
   eventDetails={
+    id:0,
     customerName : "",
     customerFullName : "",
     customerEmail : "",
@@ -159,8 +170,7 @@ export class CreateEventComponent {
     console.log(this.welcomeImage);
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-      reader.onload = (event:any) => {
-          this.url = event.target.result;  
+      reader.onload = (event:any) => { 
           this.eventDetails.customerWelcomeImage = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
@@ -169,7 +179,7 @@ export class CreateEventComponent {
 
   RemoveWelcomeImage()
   {
-    this.url=""
+    this.eventDetails.customerWelcomeImage =""
   }
 
   addEventDate(date:string){

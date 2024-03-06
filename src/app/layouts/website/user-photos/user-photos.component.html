@@ -3,18 +3,18 @@
 </section>
 <section class="se-container">
     <section class="user-title d_flex d_flex_column d_ai_center gap_">
-        <h2 class="fs_64 fw_600 ff-dancing red-clr text-center">Sharavanan & Monisha</h2>
-        <h3 class="fs_32 fw_600 ff-dancing red-clr text-center">November 28 - 29, 2023 </h3>
+        <h2 class="fs_64 fw_600 ff-dancing red-clr text-center">{{coustomerName}}</h2>
+        <h3 class="fs_32 fw_600 ff-dancing red-clr text-center">{{eventDate}}</h3>
     </section>
     <section class="tabs-wraper">
-        <app-tabs [tabsArray]="tabs" (onTabChange)="tabChange($event)"></app-tabs>
+        <app-tabs *ngIf="tabs.length !=0" [tabsArray]="tabs" (onTabChange)="tabChange($event)"></app-tabs>
         <section class="tabs-content">
             <ng-container *ngFor="let tab of tabs">
-                <aside class="tab" *ngIf="activetedTabIndex == tab" >
+                <aside class="tab" *ngIf="activetedTabIndex == tab?.eventName" >
                     <!-- <h2>{{tab}}</h2> -->
                     <section class="selected-photos d_flex d_jc_sb">
                         <aside class="left-block fs_16 fw_500">
-                            1 Selected {{tab}}
+                            1 Selected {{tab?.eventName}}
                         </aside>
                         <aside class="right-block d_flex d_ai_center gap_15">
                             <span class="d_flex">
@@ -33,7 +33,7 @@
                             </span>
                         </aside>
                     </section>
-                    <app-gallery [favorite]="true"></app-gallery>
+                    <app-gallery [eventList]="activeEvent" [favorite]="true"></app-gallery>
                 </aside>
             </ng-container>
             

@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline" class="input-control">
     <mat-label>{{iLabel}} {{isError}}</mat-label>
-    <input type="{{iType}}" matInput required placeholder={{iLabel}}>
+    <input type="{{iType}}" [(ngModel)]="value" matInput required placeholder={{iLabel}}>
     <mat-hint class="error" *ngIf="isError">Field is <strong>required*</strong></mat-hint> 
     <mat-hint class="error" *ngIf="isEmpty">Folder name should not be Empty</mat-hint> 
   </mat-form-field>

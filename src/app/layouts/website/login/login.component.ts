@@ -23,15 +23,26 @@ export class LoginComponent {
     if(this.email == null || this.email == ""){
       this.checkPhone = true
     } else {
-      this.login.postWithQuery(`/api/auth/GetOTPMail?email=${this.email}`).subscribe((responce:any)=>
+      try {
+        this.login.postWithQuery(`/api/auth/GetOTPMail?email=${this.email}`).subscribe((responce:any)=>
       {
+        console.log(responce);
+        
         if (responce.isSucceeded) {
+          this.isMailCheck = false
           this.isOtpSent = true
         } else {
-          this.mailErrorMsg = responce.errorMessage
+          console.log(responce);
+          
+          this.mailErrorMsg = responce.returnData
           this.isMailCheck = true
         }
       })
+      } catch (error) {
+        console.log(error);
+        
+      }
+      
     }
   }
   // checkNumber() {
@@ -44,6 +55,7 @@ export class LoginComponent {
     console.log(this.otpEmail);
     this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otpEmail}`).subscribe((responce:any)=> {
       if (responce.isSuccess) {
+        this.isOTPCheck = false
         localStorage.setItem('token',responce.userToken.split(":")[1])
         localStorage.setItem('role',responce.userRole) 
         localStorage.setItem('id',responce.userId) 
@@ -58,7 +70,7 @@ export class LoginComponent {
             break;
         }
       } else {
-        this.otpErrorMsg = responce.errorMessage
+        this.otpErrorMsg = responce.userToken
         this.isOTPCheck = true
       }
     })

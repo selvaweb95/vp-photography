@@ -22,4 +22,15 @@ export class SharedService {
   getCoustomerDetails():any{ 
       return this.http.post(this.baseUrl+`/api/customerpanel/GetCustomerDetails`,"")
   }
+  getCoustomerById(id:any):any{
+    return this.http.get(this.baseUrl+`/api/adminmanagement/GetCustomerById?customerId=${id}`,{headers: {
+      "ngrok-skip-browser-warning": "69420",
+    },})
+  }
+  addToFav(payload:any){
+    return this.http.post(this.baseUrl+`/api/customerpanel/AddToFav`,payload)
+  }
+  removeFav(payload:any){
+    return this.http.post(this.baseUrl+`/api/customerpanel/RemoveFromFav`,payload)
+  }
 }

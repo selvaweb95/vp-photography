@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
@@ -7,23 +8,38 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrl: './user-photos.component.scss'
 })
 export class UserPhotosComponent {
-  tabs:string[]=['Reception','Engagement','Marriage'];
-  activetedTabIndex:string=this.tabs[0];
-  landingImg:boolean=false;
+  // tabs:string[]=['Reception','Engagement','Marriage'];
+  tabs:Array<any>=[];
+  activetedTabIndex:string | undefined; 
+  landingImg:boolean=true;
   welcomeImage!: string;
-  constructor(private service:SharedService){
-    this.service.getCoustomerDetails().subscribe((res:any)=>{
-      console.log(res);
-      if (res.isSucceeded) {
-        this.welcomeImage = res.returnData.customerWelcomeImage
-        this.landingImg = true
-        setTimeout(() => {
-          this.landingImg=false
-        }, 1500);
-      }
-    })
+  coustomerName!:string;
+  eventDate!:string;
+  activeEvent:any;
+  constructor(private service:SharedService,private router: Router){
+    if (router.getCurrentNavigation()?.extras.state?.['image']) {
+      this.welcomeImage = router.getCurrentNavigation()?.extras.state?.['image'];
+    
+    // this.service.getCoustomerDetails().subscribe((res:any)=>{
+        this.coustomerName = router.getCurrentNavigation()?.extras.state?.['coustomerName']
+        this.tabs = router.getCurrentNavigation()?.extras.state?.['tabs']
+        console.log(this.tabs);
+        
+        let date = new Date(router.getCurrentNavigation()?.extras.state?.['eventDate'].split("T")[0]);
+        this.eventDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        // this.landingImg = true
+
+      setTimeout(() => {
+        this.landingImg=false
+      }, 5000);
+      this.activeEvent=this.tabs[0]
+      this.activetedTabIndex =this.tabs[0].eventName;
+    }
+    // })
   }
-  tabChange(tabIndex:string){
-    this.activetedTabIndex=tabIndex;
+  tabChange(tabIndex:any){
+    console.log("tabIndex",tabIndex);
+    this.activeEvent=tabIndex;
+    this.activetedTabIndex=tabIndex?.eventName;
   }
 }
