@@ -63,6 +63,8 @@ export class GalleryComponent {
       this.selectedImage.splice(this.selectedImage.findIndex(r=>r == item),1)
     } else {
       this.selectedImage.push(item); 
+      console.log(this.selectedImage);
+      
     }
 };
  selectFav(item:any) {
@@ -78,10 +80,6 @@ isActiveImage(item:any) {
     return this.selectedImage.includes(item) ;
 };
 isActiveFav(item:any) {
-  console.log(item);
-  
-  console.log(this.selectedFav.includes(item.id));
-  
     return this.selectedFav.includes(item.id) ;
 };
 }
