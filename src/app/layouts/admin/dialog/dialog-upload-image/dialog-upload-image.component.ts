@@ -28,15 +28,17 @@ export class DialogUploadImageComponent {
     if (this.url[0].name == "") {
       this.isImage = true
     } else {
-      this.dialogRef.close(this.url);
+      this.dialogRef.close(this.image);
     }
   }
   welcomeImage:any;
-  url: Array<any> = [];
+  
+  url: Array<{name:any,file:any}> = [];
+  image: any
   checkimage(event:any){ 
       let reader = new FileReader();
       console.log(event.target.files);
-      
+      this.image = event.target.files;
      let file;
        for (let i=0; i<event.target.files.length ; i++){
             let reader = new FileReader();

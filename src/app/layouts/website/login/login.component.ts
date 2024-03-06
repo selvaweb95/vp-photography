@@ -11,14 +11,10 @@ export class LoginComponent {
   isOtpSent:boolean=false
   email:string="";
   otpEmail:string =""
-  otp: number=0
   checkPhone:boolean=false
 
   constructor(private router: Router,private login:LoginserviceService){}
-  checkOtp(){
-    console.log(this.otpEmail);
-    
-  }
+
   sendOtp(){
     if(this.email == null || this.email == ""){
       this.checkPhone = true
@@ -38,8 +34,8 @@ export class LoginComponent {
     
 // }
  submitOtp(){
-    console.log(this.otp);
-    this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otp}`).subscribe((responce:any)=> {
+    console.log(this.otpEmail);
+    this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otpEmail}`).subscribe((responce:any)=> {
       if (responce.isSuccess) {
         localStorage.setItem('token',responce.userToken.split(":")[1])
         localStorage.setItem('role',responce.userRole) 

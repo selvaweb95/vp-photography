@@ -11,7 +11,7 @@
                 </div>
                 <span *ngIf="checkPhone">Field is required</span>
                 <div class="form-group" *ngIf="isOtpSent">
-                    <input type="number" name="otp" [(ngModel)]="otp" (change)="checkOtp()" required placeholder="Enter OTP">
+                    <input type="number" name="otp" [(ngModel)]="otpEmail" required placeholder="Enter OTP">
                 </div>
                 <button class="fs_16 fw_700 text-center form-btn" *ngIf="!isOtpSent" (click)="sendOtp()" >
                     Send OTP

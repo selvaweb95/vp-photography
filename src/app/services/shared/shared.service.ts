@@ -20,6 +20,6 @@ export class SharedService {
     return this.http.post(this.baseUrl+`/api/adminmanagement/GetAllEventsById`,"")
   }
   getCoustomerDetails():any{ 
-      return this.http.post(this.baseUrl+`api/customerpanel/GetCustomerDetails`,"")
+      return this.http.post(this.baseUrl+`/api/customerpanel/GetCustomerDetails`,"")
   }
 }
