@@ -11,6 +11,10 @@ export class LoginComponent {
   isOtpSent:boolean=false
   email:string="";
   otpEmail:string =""
+  isMailCheck:boolean=false
+  isOTPCheck:boolean=false
+  mailErrorMsg:string=""
+  otpErrorMsg:string=""
   checkPhone:boolean=false
 
   constructor(private router: Router,private login:LoginserviceService){}
@@ -23,6 +27,9 @@ export class LoginComponent {
       {
         if (responce.isSucceeded) {
           this.isOtpSent = true
+        } else {
+          this.mailErrorMsg = responce.errorMessage
+          this.isMailCheck = true
         }
       })
     }
@@ -50,6 +57,9 @@ export class LoginComponent {
             this.router.navigateByUrl('/select-photos');
             break;
         }
+      } else {
+        this.otpErrorMsg = responce.errorMessage
+        this.isOTPCheck = true
       }
     })
     // if(this.phoneNumber == null || this.phoneNumber == ""){
