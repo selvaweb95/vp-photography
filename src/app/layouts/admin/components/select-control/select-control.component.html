@@ -1,8 +1,8 @@
 <mat-form-field appearance="outline" class="input-control">
     <mat-label>{{iLabel}}</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      @for (food of foods; track food) {
-        <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+    <mat-select [(ngModel)]="value" (selectionChange)="emitEvent()" name="food">
+      @for (event of events; track event) {
+        <mat-option [value]="event.eventId">{{event.eventName}}</mat-option>
       }
     </mat-select>
     <mat-hint class="error" *ngIf="isError">Field is <strong>required*</strong></mat-hint>

@@ -9,14 +9,14 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 })
 export class DatepickerControlComponent {
   @Input() iLabel!:string;
+  @Input() value!:string;
   @Input() isError!:boolean;
   @Output() selectedDate = new EventEmitter<string>();
   // range = new FormGroup({
   //   start: new FormControl<Date | null>(null),
   //   end: new FormControl<Date | null>(null),
   // });
-  date = ""
   emitDate(){
-    this.selectedDate.emit(this.date)
+    this.selectedDate.emit(this.value)
   }
 }

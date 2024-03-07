@@ -8,7 +8,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
    -->
-   <input matInput [(ngModel)]="date" (dateChange)="emitDate()" [matDatepicker]="picker">
+   <input matInput [(ngModel)]="value" (dateChange)="emitDate()" [matDatepicker]="picker">
    <mat-hint class="error" *ngIf="isError">Field is <strong>required*</strong></mat-hint>
    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
    <mat-datepicker #picker></mat-datepicker>

@@ -19,8 +19,8 @@
         <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Event Info</h2>
         <section class="d_grid d_grid_3">
             <input-control [(ngModel)]="eventDetails.customerName" [value]="eventDetails.customerName" ngDefaultControl [isError]="eventValidation.isCustomerName" [iLabel]="'Customer Name'"></input-control>
-            <select-control [(ngModel)]="eventDetails.eventType" ngDefaultControl [isError]="eventValidation.isEventType" [iLabel]="'Event Type'"></select-control>
-            <datepicker-control [(ngModel)]="eventDetails.eventDate" (selectedDate)="addEventDate($event)" [isError]="eventValidation.isEventDate" ngDefaultControl [iLabel]="'Enter a Start date to End date range'"></datepicker-control>
+            <select-control [(ngModel)]="eventDetails.eventType"  [value]="eventDetails.eventType" ngDefaultControl [isError]="eventValidation.isEventType" (selectedEvent)="addEventType($event)" [iLabel]="'Event Type'"></select-control>
+            <datepicker-control [(ngModel)]="eventDetails.eventDate" [value]="eventDetails.eventDate" (selectedDate)="addEventDate($event)" [isError]="eventValidation.isEventDate" ngDefaultControl [iLabel]="'Enter a Start date to End date range'"></datepicker-control>
         </section>
         <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Welcome Image</h2>
         <section class="welcome-img p_20" [ngClass]="eventValidation.isCustomerWelcomeImage ? 'error' : ''">
@@ -377,7 +377,7 @@
             <input-control [(ngModel)]="eventDetails.customerFullName" [value]="eventDetails.customerFullName"  [isError]="eventValidation.isCustomerFullName" ngDefaultControl [iLabel]="'Full Name'"></input-control>
             <input-control [(ngModel)]="eventDetails.customerEmail" [value]="eventDetails.customerEmail" [iType]="'email'"  ngDefaultControl [isError]="eventValidation.isCustomerEmail" [iLabel]="'Email ID'"></input-control>
             <!-- <input-control [(ngModel)]="eventDetails.customerEmail" ngDefaultControl [iLabel]="'Contact Number'"></input-control> -->
-            <datepicker-control [(ngModel)]="eventDetails.albumValidTill" (selectedDate)="addValidTillDate($event)" [isError]="eventValidation.isAlbumValidTill" [iLabel]="'Valid Till'"></datepicker-control>
+            <datepicker-control [(ngModel)]="eventDetails.albumValidTill" [value]="eventDetails.albumValidTill" (selectedDate)="addValidTillDate($event)" [isError]="eventValidation.isAlbumValidTill" [iLabel]="'Valid Till'"></datepicker-control>
         </section>
         <aside class="d_flex d_jc_end gap_15 m_t_20">
             <button mat-raised-button>

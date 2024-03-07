@@ -26,6 +26,6 @@ export class SelectListComponent {
   }
 
   navigateTo(url:string){
-    this.router.navigate([url], { state: { image: this.welcomeImage,coustomerName:this.response.customerName,tabs:this.response.eventList,eventDate: this.response.eventDate,FavouriteList: this.response.favouriteList } });
+    this.router.navigate([url], { state: { image: this.welcomeImage,coustomerName:this.response.customerName,tabs:this.response.eventList,eventDate: this.response.eventDate,FavouriteList: this.response.favouriteList,albumLimit : this.response.albumLimit } });
   }
 }

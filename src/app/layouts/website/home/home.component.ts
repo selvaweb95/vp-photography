@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, HostListener, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Aos from 'aos';
+import { LoginserviceService } from 'src/app/services/loginService/loginservice.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
@@ -31,8 +32,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     arrows: false,
  };
  navLink:string=''
-  constructor(private router: Router,private navser:NavbarService,@Inject(DOCUMENT) private document: any) {
-  
+  constructor(private router: Router,private navser:NavbarService,@Inject(DOCUMENT) private document: any,private auth:LoginserviceService) {
+
+    if (this.auth.isAuthenticated()) {
+      console.log("navigate");
+      this.router.navigateByUrl('/login');
+    }
     this.navser.navId.subscribe((data)=>{
     this.navLink=data;
     this.navigationScroll();
@@ -103,6 +108,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate([], { fragment: name });
   }
   ngOnInit(): void {
+    if (this.auth.isAuthenticated()) {
+      console.log("navigate");
+      this.router.navigateByUrl('/login');
+    }
     Aos.init({
       once: true,
       duration: 1200,

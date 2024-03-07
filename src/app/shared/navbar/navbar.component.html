@@ -1,10 +1,10 @@
 <ul class="d_flex ">
-    <li class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <a routerLink="" (click)="navName('Home')" [ngClass]="{'active': navActive === 'Home'}" class="fs_16 fw_600">
           <span>Home</span>
         </a>
     </li>
-    <li  class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <a (click)="navName('aboutus')" [ngClass]="{'active': navActive === 'aboutus'}" class="fs_16 fw_600">
             <span>
                 About us
@@ -12,7 +12,7 @@
             
         </a>
     </li>
-    <li  class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <!-- https://dev.to/ferfox1981/tree-ways-to-scroll-to-an-element-using-angular-1dlj -->
         <!-- <a routerLink="/home/aboutus" [state]="{'scrollto':'aboutus'}" class="fs_16 fw_600"> -->
         <a (click)="navName('Products')" [ngClass]="{'active': navActive === 'Products'}" class="fs_16 fw_600">
@@ -22,7 +22,7 @@
             
         </a>
     </li>
-    <li  class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <a (click)="navName('aboutus')" [ngClass]="{'active': navActive === 'aboutus'}" class="fs_16 fw_600">
             <span>
                 Blog
@@ -30,7 +30,7 @@
             
         </a>
     </li>
-    <li  class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <a (click)="navName('ContactUs')" [ngClass]="{'active': navActive === 'ContactUs'}" class="fs_16 fw_600">
             <span>Contact Us</span>
         </a>
@@ -40,9 +40,16 @@
             <span>Login</span>
         </a>
     </li> -->
-    <li  class="d_flex d_flex_column">
+    <li *ngIf="!getAuthenticate()" class="d_flex d_flex_column">
         <a routerLink="login" class="fs_16 fw_600">
             <span>Login</span>
         </a>
     </li>
+    <div *ngIf="getAuthenticate()">
+        <li  class="d_flex d_flex_column">
+            <a (click)="logout()" class="fs_16 fw_600">
+                <span>Log out</span>
+            </a>
+        </li>
+    </div>
 </ul>

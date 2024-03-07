@@ -33,4 +33,10 @@ export class SharedService {
   removeFav(payload:any){
     return this.http.post(this.baseUrl+`/api/customerpanel/RemoveFromFav`,payload)
   }
+  getEvent(){
+    return this.http.post(this.baseUrl+`/api/adminmanagement/GetAllEventTypes`,"")
+  }
+  updateSelectedImage(payload:any){
+    return this.http.post(this.baseUrl+`/api/customerpanel/AddSelectedImages`,payload)
+  }
 }

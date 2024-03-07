@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit{
   @Input() tabsArray:any[] =[];
+  @Input() imageSelected:any[] =[];
   @Output() onTabChange = new EventEmitter<string>();
   activatedTab:string | undefined;
   constructor(){
@@ -18,7 +19,11 @@ export class TabsComponent implements OnInit{
     this.activatedTab= this.tabsArray[0].eventName;
   }
   setTab(tabName:string){
+    if (this.imageSelected.length !== 0) {
+      return false
+    }
     this.activatedTab=tabName;
     this.onTabChange.emit(this.activatedTab);
   }
-}
+  }
+

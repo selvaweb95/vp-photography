@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 interface Food {
   value: string;
@@ -16,20 +17,18 @@ interface Car {
   styleUrl: './select-control.component.scss'
 })
 export class SelectControlComponent {
+  events:any;
+  constructor(private http:SharedService){
+    http.getEvent().subscribe((data:any)=>{
+      this.events=data.returnData
+    })
+  }
   @Input() iLabel!:string;
   @Input() isError!:boolean;
-  selectedValue!: string;
-  selectedCar!: string;
+  @Input() value!:any;
+  @Output() selectedEvent = new EventEmitter<string>();
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
-
-  cars: Car[] = [
-    {value: 'volvo', viewValue: 'Volvo'},
-    {value: 'saab', viewValue: 'Saab'},
-    {value: 'mercedes', viewValue: 'Mercedes'},
-  ];
+  emitEvent(){
+    this.selectedEvent.emit(this.value)
+  }
 }

@@ -182,11 +182,14 @@ export class CreateEventComponent {
     this.eventDetails.customerWelcomeImage =""
   }
 
-  addEventDate(date:string){
+  addEventDate(date:any){
     this.eventDetails.eventDate = date
   }
-  addValidTillDate(date:string){
+  addValidTillDate(date:any){
     this.eventDetails.albumValidTill = date
+  }
+  addEventType(data:any){
+    this.eventDetails.eventType = data
   }
 
   createEvent(){

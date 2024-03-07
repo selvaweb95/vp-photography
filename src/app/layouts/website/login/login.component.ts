@@ -17,7 +17,19 @@ export class LoginComponent {
   otpErrorMsg:string=""
   checkPhone:boolean=false
 
-  constructor(private router: Router,private login:LoginserviceService){}
+  constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService){
+    if (auth.isAuthenticated()) {
+      switch (localStorage.getItem('role')) {
+        case "1" :
+          this.router.navigateByUrl('/admin-panel');
+          break;
+        
+        case "2":
+          this.router.navigateByUrl('/select-photos');
+          break;
+    }
+  }
+  }
 
   sendOtp(){
     if(this.email == null || this.email == ""){

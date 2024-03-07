@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   GalleryItem,
   ImageItem,
@@ -17,7 +17,10 @@ export class GalleryComponent {
   items: GalleryItem[] = [];
   @Input() favorite!:boolean;
   @Input() eventList:any
-  @Input() FavouriteList:any
+  @Input() FavouriteList:any 
+  @Input() albumLimit:any 
+  @Output() selectedImg = new EventEmitter<any>();
+
   imageData:any;
   selectedImage :Array<any>=[];
   selectedFav :Array<any>=[];
@@ -33,12 +36,12 @@ export class GalleryComponent {
       (item: { file: any; }) => new ImageItem({ src: item.file, thumb: item.file })
     );
     this.imageData=this.eventList?.photos
-    this.selectedFav =(this.FavouriteList);
+    // this.selectedFav =(this.FavouriteList);
     for (let index = 0; index < this.FavouriteList.length; index++) {
       this.selectedFav.push(this.FavouriteList[index].id)
       
     }
-    console.log(this.isActiveFav(this.FavouriteList[0]));
+    // console.log(this.isActiveFav(this.FavouriteList[0]));
     
     // this.favorite=
     /** Lightbox Example */
@@ -59,16 +62,18 @@ export class GalleryComponent {
   }
 
   selectImage(item:any) {
+    if (this.selectedImage.length > this.albumLimit) {
+      return false
+    }
     if (this.selectedImage.includes(item)) {
       this.selectedImage.splice(this.selectedImage.findIndex(r=>r == item),1)
     } else {
       this.selectedImage.push(item); 
-      console.log(this.selectedImage);
-      
     }
+    this.selectedImg.emit(this.selectedImage)
 };
  selectFav(item:any) {
-  if (this.selectedFav.includes(item)) {
+  if (this.selectedFav.includes(item.id)) {
     this.selectedFav.splice(this.selectedFav.findIndex(r=> r == item.id),1)
     this.service.removeFav(item).subscribe((data:any)=>{console.log(data)})
   } else {

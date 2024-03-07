@@ -7,17 +7,17 @@
         <h3 class="fs_32 fw_600 ff-dancing red-clr text-center">{{eventDate}}</h3>
     </section>
     <section class="tabs-wraper">
-        <app-tabs *ngIf="tabs.length !=0" [tabsArray]="tabs" (onTabChange)="tabChange($event)"></app-tabs>
+        <app-tabs *ngIf="tabs.length !=0" [tabsArray]="tabs" [imageSelected]="selectedImage"  (onTabChange)="tabChange($event)"></app-tabs>
         <section class="tabs-content">
             <ng-container *ngFor="let tab of tabs">
                 <aside class="tab" *ngIf="activetedTabIndex == tab?.eventName" >
                     <!-- <h2>{{tab}}</h2> -->
                     <section class="selected-photos d_flex d_jc_sb">
                         <aside class="left-block fs_16 fw_500">
-                            1 Selected {{tab?.eventName}}
+                            <div *ngIf="this.selectedImage.length !== 0" >{{this.selectedImage.length}} Selected {{tab?.eventName}}</div>
                         </aside>
                         <aside class="right-block d_flex d_ai_center gap_15">
-                            <span class="d_flex">
+                            <span (click)="AddToAlbum()" class="d_flex">
                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 11V5.95C1 5.067 1 4.626 1.07 4.258C1.21922 3.46784 1.60314 2.741 2.17165 2.17231C2.74017 1.60361 3.46689 1.21947 4.257 1.07C4.626 1 5.068 1 5.95 1C6.336 1 6.53 1 6.716 1.017C7.51705 1.09223 8.27679 1.40728 8.896 1.921C9.04 2.04 9.176 2.176 9.45 2.45L10 3C10.816 3.816 11.224 4.224 11.712 4.495C11.9802 4.64449 12.2648 4.7626 12.56 4.847C13.098 5 13.675 5 14.828 5H15.202C17.834 5 19.151 5 20.006 5.77C20.085 5.84 20.16 5.915 20.23 5.994C21 6.849 21 8.166 21 10.798V13C21 16.771 21 18.657 19.828 19.828C18.657 21 16.771 21 13 21H9C5.229 21 3.343 21 2.172 19.828C1.518 19.175 1.229 18.3 1.102 17" stroke="#E28B00" stroke-width="1.75" stroke-linecap="round"/>
                                     <path d="M1 14H12M12 14L7.875 11M12 14L7.875 17" stroke="#E28B00" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -33,7 +33,7 @@
                             </span>
                         </aside>
                     </section>
-                    <app-gallery [eventList]="activeEvent" [FavouriteList]="FavouriteList" [favorite]="true"></app-gallery>
+                    <app-gallery [eventList]="activeEvent" [albumLimit]="albumLimit" (selectedImg)="updateSelectedImage($event)" [FavouriteList]="FavouriteList" [favorite]="true"></app-gallery>
                 </aside>
             </ng-container>
             
