@@ -47,7 +47,7 @@ const routes: Routes = [
     children : [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'events', component: EventsComponent, },  
-        { path: 'events/new-events', component: CreateEventComponent },  
+        { path: 'events/:id', component: CreateEventComponent },  
         { path: 'my-schedules', component: MySchedulesComponent },  
         { path: '', redirectTo:'events', pathMatch:"full" }
     ]
