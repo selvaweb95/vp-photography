@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
@@ -10,17 +11,18 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 export class SelectListComponent {
   welcomeImage:string="";
   response:any
-  isloaded:boolean=false
-  constructor(private router:Router,private service:SharedService) {
+  constructor(private router:Router,private service:SharedService,private loader:AppComponent) {
+    loader.loader=true
     this.service.getCoustomerDetails().subscribe((res:any)=>{
-      this.isloaded=true
       console.log(res);
       if (res.isSucceeded) {
         console.log(res.returnData.customerWelcomeImage);
         this.response = res.returnData
         this.welcomeImage = res.returnData.customerWelcomeImage
         console.log("this.welcomeImage ",this.welcomeImage );
-        this.isloaded=false
+        if (this.response.eventList) {
+          loader.loader=false
+        }
       }
     })
   }

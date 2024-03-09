@@ -11,6 +11,7 @@ export class AppComponent {
   stickyHeader = false;
   contactPopup = false;
   mobileMenu = false;
+  public loader :boolean=false;
   resizeWidth!:number;
   isMobileMenu:boolean=false;
   contactShow() {

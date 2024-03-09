@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { LoginserviceService } from 'src/app/services/loginService/loginservice.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginComponent {
   otpErrorMsg:string=""
   checkPhone:boolean=false
 
-  constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService){
+  constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService,private loader:AppComponent){
     if (auth.isAuthenticated()) {
       switch (localStorage.getItem('role')) {
         case "1" :
@@ -36,6 +37,7 @@ export class LoginComponent {
       this.checkPhone = true
     } else {
       try {
+        this.loader.loader=true;
         this.login.postWithQuery(`/api/auth/GetOTPMail?email=${this.email}`).subscribe((responce:any)=>
       {
         console.log(responce);
@@ -43,11 +45,11 @@ export class LoginComponent {
         if (responce.isSucceeded) {
           this.isMailCheck = false
           this.isOtpSent = true
+          this.loader.loader=false;
         } else {
-          console.log(responce);
-          
           this.mailErrorMsg = responce.returnData
           this.isMailCheck = true
+          this.loader.loader=false;
         }
       })
       } catch (error) {
@@ -65,6 +67,7 @@ export class LoginComponent {
 // }
  submitOtp(){
     console.log(this.otpEmail);
+    this.loader.loader=true;
     this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otpEmail}`).subscribe((responce:any)=> {
       if (responce.isSuccess) {
         this.isOTPCheck = false
@@ -74,16 +77,19 @@ export class LoginComponent {
         // this.router.navigateByUrl('/admin-panel');
         switch (responce.userRole) {
           case "1" :
+            this.loader.loader=false;
             this.router.navigateByUrl('/admin-panel');
             break;
           
           case "2":
+            this.loader.loader=false;
             this.router.navigateByUrl('/select-photos');
             break;
         }
       } else {
         this.otpErrorMsg = responce.userToken
         this.isOTPCheck = true
+        this.loader.loader=false;
       }
     })
     // if(this.phoneNumber == null || this.phoneNumber == ""){

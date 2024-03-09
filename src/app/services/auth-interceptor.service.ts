@@ -3,6 +3,7 @@ import { Observable, catchError, throwError } from "rxjs";
 import { LoginserviceService } from "./loginService/loginservice.service";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+// import { AppComponent } from "../app.component";
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
@@ -18,6 +19,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         }
         return next.handle(request).pipe(
             catchError((error) => {
+                // this.loader.loader=false
               if (error instanceof HttpErrorResponse
               ) {
                 if (error.error == "UnAuthrized") {
