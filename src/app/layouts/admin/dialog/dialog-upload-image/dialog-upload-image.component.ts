@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-dialog-upload-image',
   standalone: true,
-  imports: [CommonModule,MatButtonModule],
+  imports: [CommonModule,MatButtonModule,MatDialogModule],
   templateUrl: './dialog-upload-image.component.html',
   styleUrl: './dialog-upload-image.component.scss'
 })

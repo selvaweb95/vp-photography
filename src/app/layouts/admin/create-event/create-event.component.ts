@@ -122,8 +122,7 @@ export class CreateEventComponent {
 
   editEventList(index:any){
     const dialogRef = this.dialog.open(DialogUploadImageComponent, {
-      height: '70%',
-      width: '75%',
+      width: '90%',
       data: this.eventDetails.eventList[index]
     });
 

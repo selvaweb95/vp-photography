@@ -16,15 +16,15 @@
         </aside>
     </section>
     <section class="new-event-block border p_20 m_t_20">
-        <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Event Info</h2>
+        <h2 class="fs_18 fw_600 p_t_10 p_b_20 ">Event Info</h2>
         <section class="d_grid d_grid_3">
             <input-control [(ngModel)]="eventDetails.customerName" [value]="eventDetails.customerName" ngDefaultControl [isError]="eventValidation.isCustomerName" [iLabel]="'Customer Name'"></input-control>
             <select-control [(ngModel)]="eventDetails.eventType"  [value]="eventDetails.eventType" ngDefaultControl [isError]="eventValidation.isEventType" (selectedEvent)="addEventType($event)" [iLabel]="'Event Type'"></select-control>
             <datepicker-control [(ngModel)]="eventDetails.eventDate" [value]="eventDetails.eventDate" (selectedDate)="addEventDate($event)" [isError]="eventValidation.isEventDate" ngDefaultControl [iLabel]="'Enter a Start date to End date range'"></datepicker-control>
         </section>
-        <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Welcome Image</h2>
+        <h2 class="fs_18 fw_600 p_t_10 p_b_20 ">Welcome Image</h2>
         <section class="welcome-img p_20" [ngClass]="eventValidation.isCustomerWelcomeImage ? 'error' : ''">
-            <div class="browse-img d_flex d_flex_column gap_15 d_jc_center d_ai_center">
+            <div class="browse-img d_flex d_flex_column gap_15 d_jc_center d_ai_center" *ngIf="eventDetails.customerWelcomeImage == '' ">
                 <input class="welcome-file-upload" title="" type="file" name="" accept="image/*" [(ngModel)]="welcomeImage" ngDefaultControl (change)="checkimage($event)" id="">
                 <span>
                     <svg width="158" height="158" viewBox="0 0 158 158" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -278,7 +278,7 @@
             </div>
             <aside class="img-wrapper d_flex  d_jc_center d_ai_center">
                 <div class="img-block d_flex d_flex_column gap_15 d_jc_center d_ai_center">
-                    <span *ngIf="eventDetails.customerWelcomeImage != '' " (click)="RemoveWelcomeImage()" >
+                    <span class="pointer" *ngIf="eventDetails.customerWelcomeImage != '' " (click)="RemoveWelcomeImage()" >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
@@ -295,7 +295,14 @@
             </aside>
 
         </section>
-        <h2 class="fs_14 fw_600 p_t_20 p_b_10 ">Event List</h2>
+        <section class="d_flex d_jc_sb m_t_20 border_btm p_b_10 d_ai_center">
+            <h2 class="fs_18 fw_600 p_t_20 p_b_10 ">Event List </h2>
+            <div>
+                <button (click)="addNewEvent()" mat-raised-button class="add-new-event btn-darkblue" color="primary">
+                    <span class="fs_14 fw_500 text-white"> + Add New Event</span>
+                </button>
+            </div>
+        </section>
         <!-- https://medium.com/@tarekabdelkhalek/how-to-create-a-drag-and-drop-file-uploading-in-angular-78d9eba0b854 -->
         <!-- <input class="file-upload" title="" type="file" name="" id=""> -->
         <!-- <section class="event-list-block d_grid d_grid_3 p_t_10">
@@ -363,16 +370,14 @@
                 </button>
             </aside>
         </section>
-        <button (click)="addNewEvent()" mat-raised-button class="add-new-event btn-darkblue" color="primary">
-            <span class="fs_14 fw_500 text-white"> + Add New Event</span>
-        </button>
-        <h2 class="fs_14 fw_600 p_t_20 p_b_10 ">Image Limit</h2>
+        
+        <h2 class="fs_18 fw_600 p_t_20 p_b_10 ">Image Limit</h2>
         <section class="event-list-block d_grid d_grid_3 p_t_10">
             <input-control [(ngModel)]="eventDetails.albumLimit" [value]="eventDetails.albumLimit" [iType]="'number'" [isError]="eventValidation.isAlbumLimit" ngDefaultControl [iLabel]="'Max Image Limit'"></input-control>
         </section>
     </section>
     <section class=" border p_20 m_t_20">
-        <h2 class="fs_14 fw_600 p_t_10 p_b_20 ">Customer Info</h2>
+        <h2 class="fs_18 fw_600 p_t_10 p_b_20 ">Customer Info</h2>
         <section class="d_grid d_grid_3">
             <input-control [(ngModel)]="eventDetails.customerFullName" [value]="eventDetails.customerFullName"  [isError]="eventValidation.isCustomerFullName" ngDefaultControl [iLabel]="'Full Name'"></input-control>
             <input-control [(ngModel)]="eventDetails.customerEmail" [value]="eventDetails.customerEmail" [iType]="'email'"  ngDefaultControl [isError]="eventValidation.isCustomerEmail" [iLabel]="'Email ID'"></input-control>

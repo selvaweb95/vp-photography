@@ -40,6 +40,13 @@
         }
       }
     }
+    .event-list-block{
+      .file-detailas{
+        box-shadow: 0 0 15px 2px #cbcbcb;
+        border-radius: 9px;
+        margin-bottom: 5px;
+      }
+    }
     .upload-folder {
       height: 56px;
       button {
@@ -49,10 +56,11 @@
       .file-detailas{
         background-color: #FAFAFA;
         border-radius: 5px;
+
       }
     }
     .add-new-event {
-      height: 56px;
+      min-height: 42px;
       width: 100%;
       span {
         color: #fff;

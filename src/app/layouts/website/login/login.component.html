@@ -13,8 +13,10 @@
                 <span *ngIf="isMailCheck">{{mailErrorMsg}}</span>
                 <div class="form-group" *ngIf="isOtpSent">
                     <input type="number" name="otp" [(ngModel)]="otpEmail" required placeholder="Enter OTP">
+                    <p class="d_flex d_jc_end">
+                        <span class="fs_15 fw_700 text-center p_t_10 resend-otp" *ngIf="isOtpSent" (click)="sendOtp()">Resend OTP</span>
+                    </p>
                 </div>
-                <button class="fs_16 fw_700 text-center form-btn" *ngIf="isOtpSent" (click)="sendOtp()">Resend OTP</button>
                 <button class="fs_16 fw_700 text-center form-btn" *ngIf="!isOtpSent" (click)="sendOtp()" >
                     Send OTP
                 </button>
