@@ -8,16 +8,16 @@
             <form action="">
                 <div class="form-group" *ngIf="!isOtpSent">
                     <input type="email" name="phoneNumber"[(ngModel)]="email" required placeholder="Enter your Email">
+                    <span *ngIf="checkPhone" class="error-msg">Field is required</span>
                 </div>
-                <span *ngIf="checkPhone">Field is required</span>
                 <span *ngIf="isMailCheck">{{mailErrorMsg}}</span>
                 <div class="form-group" *ngIf="isOtpSent">
                     <input type="number" name="otp" [(ngModel)]="otpEmail" required placeholder="Enter OTP">
                 </div>
+                <button class="fs_16 fw_700 text-center form-btn" *ngIf="isOtpSent" (click)="sendOtp()">Resend OTP</button>
                 <button class="fs_16 fw_700 text-center form-btn" *ngIf="!isOtpSent" (click)="sendOtp()" >
                     Send OTP
                 </button>
-                <span *ngIf="isOtpSent" (click)="sendOtp()">Resend OTP</span>
                 <span *ngIf="isOTPCheck" >{{otpErrorMsg}}</span>
                 <button class="fs_16 fw_700 text-center form-btn" *ngIf="isOtpSent" (click)="submitOtp()" >
                     Submit

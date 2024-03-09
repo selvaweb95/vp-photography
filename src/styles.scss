@@ -199,7 +199,18 @@ table {
     }
   }
 }
-
+.loader-icon{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffffbf;
+  z-index: 999;
+}
 // font size and font weight properties
 .fs {
   &_13 {
@@ -833,4 +844,8 @@ body.stickyHeader footer{
 
 .input-control{
   width: 100%;
+}
+.error-msg{
+  font-size: 11px;
+  color: red;
 }
