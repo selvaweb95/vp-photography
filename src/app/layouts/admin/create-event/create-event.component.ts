@@ -10,7 +10,8 @@ import {
 } from '@angular/material/dialog';
 import { DialogUploadImageComponent } from '../dialog/dialog-upload-image/dialog-upload-image.component';
 import { SharedService } from 'src/app/services/shared/shared.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-create-event',
@@ -18,13 +19,16 @@ import { Router } from '@angular/router';
   styleUrl: './create-event.component.scss'
 })
 export class CreateEventComponent {
-  constructor(public dialog: MatDialog,private http: SharedService,router:Router) {
-    if (router.getCurrentNavigation()?.extras.state?.['id']) {
-      http.getCoustomerById(router.getCurrentNavigation()?.extras.state?.['id']).subscribe((res:any)=>{
+  constructor(public dialog: MatDialog,private http: SharedService,private router:Router,private loader:AppComponent,private route:ActivatedRoute) {
+    console.log(route.snapshot.paramMap.get('id'));
+    
+    if (route.snapshot.paramMap.get('id') != "0") {
+      loader.loader=true
+      http.getCoustomerById(route.snapshot.paramMap.get('id')).subscribe((res:any)=>{
         if (res.isSucceeded) {
           this.eventDetails=res.returnData
           console.log(this.eventDetails);
-          
+          loader.loader=false
         }
       })
     }
@@ -197,9 +201,13 @@ export class CreateEventComponent {
     console.log(this.validateEvent());
     
     if (this.validateEvent()) {
+      this.loader.loader = true
       this.http.createEvent(this.eventDetails).subscribe((res)=>{
         console.log(res);
-        
+        if (res) {
+          this.loader.loader = false
+          this.router.navigateByUrl('/admin-panel');
+        }
       }) 
     }
   }
