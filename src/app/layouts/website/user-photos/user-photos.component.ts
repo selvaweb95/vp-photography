@@ -52,6 +52,10 @@ export class UserPhotosComponent {
     console.log("imagw",image);
     this.selectedImage=image;
   }
+  // isSelectedAll:boolean=false
+  // selectAll(){
+  //   this.isSelectedAll = !this.isSelectedAll
+  // }
   AddToAlbum(){
     let data={ "eventName" : this.activeEvent.eventName, selectedImage : this.selectedImage }
     this.service.updateSelectedImage(data).subscribe((data)=>{

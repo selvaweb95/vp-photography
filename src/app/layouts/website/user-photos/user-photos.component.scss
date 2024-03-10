@@ -30,7 +30,36 @@
             padding: 10px 0;
             margin-bottom: 10px;
             .right-block{
-
+                span{
+                    // box-shadow: 0 0 30px -12px rgba(0, 0, 0, 0.206);
+                    cursor: pointer;
+                    &.select{
+                        border: 2px solid rgb(226, 139, 0);
+                        border-radius: 3px;
+                        background-color: transparent;
+                        height: 24px;
+                        width: 24px;
+                        svg{
+                            height: auto;
+                        }
+                    }
+                    svg{
+                        fill: rgb(226, 139, 0);
+                        path{
+                            transition: all 0.3s;
+                            fill: rgba(226, 139, 0, 0);
+                            stroke: rgb(226, 139, 0);
+                        }
+                    }
+                    
+                    &.activeImage{
+                        svg{
+                            path{
+                                fill: rgb(226, 139, 0);
+                            }
+                        }
+                    }
+                }
             }
         }
         }

@@ -11,12 +11,12 @@ export class TabsComponent implements OnInit{
   @Output() onTabChange = new EventEmitter<string>();
   activatedTab:string | undefined;
   constructor(){
-    
+
   }
   ngOnInit(): void {
     console.log("this.activatedTab",this.tabsArray[0].eventName);
     
-    this.activatedTab= this.tabsArray[0].eventName;
+    this.activatedTab= this.tabsArray[0];
   }
   setTab(tabName:string){
     if (this.imageSelected.length !== 0) {
