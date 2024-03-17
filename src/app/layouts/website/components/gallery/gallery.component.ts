@@ -20,10 +20,12 @@ export class GalleryComponent {
   @Input() FavouriteList:any 
   @Input() albumLimit:any 
   @Output() selectedImg = new EventEmitter<any>();
+  @Output() isNewlySelected = new EventEmitter<any>();
 
   imageData:any;
   selectedImage :Array<any>=[];
   selectedFav :Array<any>=[];
+  newlyelectedcount:number=0;
   constructor(public gallery: Gallery, public lightbox: Lightbox,private service:SharedService) {}
 
   ngOnInit() {
@@ -44,9 +46,6 @@ export class GalleryComponent {
       imageSize: ImageSize.Cover,
       thumbPosition: ThumbnailsPosition.Top,
     });
-
-    console.log(this.items[0]);
-    
     lightboxRef.load(this.items);
   }
 
@@ -57,11 +56,14 @@ export class GalleryComponent {
       }
     }
     if (this.selectedImage.includes(item)) {
+      this.newlyelectedcount=this.newlyelectedcount - 1
       this.selectedImage.splice(this.selectedImage.findIndex(r=>r == item),1)
     } else {
+      this.newlyelectedcount=this.newlyelectedcount + 1
       this.selectedImage.push(item); 
     }
     this.selectedImg.emit(this.selectedImage)
+    this.isNewlySelected.emit(this.newlyelectedcount)
 };
  selectFav(item:any) {
   if (this.selectedFav.includes(item.id)) {

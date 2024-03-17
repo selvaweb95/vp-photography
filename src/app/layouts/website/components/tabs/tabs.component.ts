@@ -9,6 +9,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 export class TabsComponent implements OnInit{
   @Input() tabsArray:any[] =[];
   @Input() imageSelected:any[] =[];
+  @Input() newlySelected:boolean=false
   @Output() onTabChange = new EventEmitter<string>();
   activatedTab:string | undefined;
   constructor(private service:SharedService){
@@ -18,7 +19,7 @@ export class TabsComponent implements OnInit{
     this.activatedTab= this.tabsArray[0];
   }
   setTab(tabName:string){
-    if (this.imageSelected.length !== 0) {
+    if (this.newlySelected) {
       this.service.openSnackBar("Add the selected Photos to the Folder Before switching the Tabs")
       return false
     }

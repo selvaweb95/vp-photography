@@ -7,7 +7,7 @@
         <h3 class="fs_32 fw_600 ff-dancing red-clr text-center">{{eventDate}}</h3>
     </section>
     <section class="tabs-wraper">
-        <app-tabs *ngIf="tabs.length !=0" [tabsArray]="tabs" [imageSelected]="selectedImage"  (onTabChange)="tabChange($event)"></app-tabs>
+        <app-tabs *ngIf="tabs.length !=0" [tabsArray]="tabs" [imageSelected]="selectedImage" [newlySelected]="newlySelected"  (onTabChange)="tabChange($event)"></app-tabs>
         <section class="tabs-content">
             <ng-container *ngFor="let tab of tabs">
                 <aside class="tab" *ngIf="activetedTabIndex == tab?.eventName" >
@@ -37,7 +37,7 @@
                             </span>
                         </aside>
                     </section>
-                    <app-gallery [eventList]="activeEvent" [albumLimit]="albumLimit" (selectedImg)="updateSelectedImage($event)" [FavouriteList]="FavouriteList" [favorite]="true"></app-gallery>
+                    <app-gallery [eventList]="activeEvent" [albumLimit]="albumLimit" (selectedImg)="updateSelectedImage($event)" (isNewlySelected)="updateCondition($event)" [FavouriteList]="FavouriteList" [favorite]="true"></app-gallery>
                 </aside>
             </ng-container>
             

@@ -23,19 +23,17 @@ export class UserPhotosComponent {
       this.welcomeImage = router.getCurrentNavigation()?.extras.state?.['image'];
       this.FavouriteList = router.getCurrentNavigation()?.extras.state?.['FavouriteList']; 
       this.albumLimit = router.getCurrentNavigation()?.extras.state?.['albumLimit']; 
-    
-    // this.service.getCoustomerDetails().subscribe((res:any)=>{
+
         this.coustomerName = router.getCurrentNavigation()?.extras.state?.['coustomerName']
         this.tabs = router.getCurrentNavigation()?.extras.state?.['tabs']
         console.log(this.tabs);
         
         let date = new Date(router.getCurrentNavigation()?.extras.state?.['eventDate'].split("T")[0]);
         this.eventDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        // this.landingImg = true
 
       setTimeout(() => {
         this.landingImg=false
-      }, 5000);
+      }, 3000);
       this.activeEvent=this.tabs[0]
       this.activetedTabIndex =this.tabs[0].eventName;
     }
@@ -52,14 +50,23 @@ export class UserPhotosComponent {
     console.log("imagw",image);
     this.selectedImage=image;
   }
-  // isSelectedAll:boolean=false
-  // selectAll(){
-  //   this.isSelectedAll = !this.isSelectedAll
-  // }
+  newlySelected=false
+  updateCondition(count:any){
+    if (count > 0) {
+      this.newlySelected = true
+    } else {
+      this.newlySelected = false
+    }
+  }
+
   AddToAlbum(){
     let data={ "eventName" : this.activeEvent.eventName, selectedImage : this.selectedImage }
-    this.service.updateSelectedImage(data).subscribe((data)=>{
+    this.service.updateSelectedImage(data).subscribe((data:any)=>{
       console.log(data);
+      if (data.isSuccessed) {
+        this.newlySelected = false
+        this.service.openSnackBar("Added to Album")
+      }
     })
   }
 }

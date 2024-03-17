@@ -28,7 +28,7 @@ export class SignatureComponent implements OnInit {
   constructor(public gallery: Gallery) {
     setTimeout(() => {
       this.landingImg=false
-    }, 1500);
+    }, 3000);
   }
   ngOnInit(): void {
     this.items = this.image?.photos.map(
