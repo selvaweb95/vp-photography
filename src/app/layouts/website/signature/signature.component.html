@@ -1,0 +1,22 @@
+<section class="landing-photo d_flex d_ai_center d_jc_center" *ngIf="landingImg">
+    <img [src]="CoverImage" class="img-responsive" alt="">
+</section>
+<section class="se-container">
+    <section class="user-title d_flex d_flex_column d_ai_center gap_">
+        <h2 class="fs_64 fw_600 ff-dancing red-clr text-center">{{coustomerName}}</h2>
+        <h3 class="fs_32 fw_600 ff-dancing red-clr text-center">{{eventDate}}</h3>
+    </section>
+    <section class="tabs-wraper">
+        <section class="tabs-content"> 
+            <div class="">
+                <div class="gallery-container" gallerize>
+                  <figure *ngFor="let item of imageData;index as i">
+                    <img  [src]="item.file">
+                  </figure>
+                </div>
+              </div>
+        </section>
+    </section>
+
+</section>
+

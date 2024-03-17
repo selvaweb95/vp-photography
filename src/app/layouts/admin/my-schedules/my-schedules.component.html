@@ -1,24 +1,9 @@
 <section class="">
-    <section class="d_flex d_jc_start">
-        <aside class="fs_24 fw_600 p_b_10">
-            Hi, Welcome back Admin!!
-        </aside>
-    </section>
-    <section class="new-event-block p_t_20">
-        <section class="d_grid d_grid_3">
-            <aside class="border p_20 ">
-                <h2 class="fs_14 fw_500 gray-400">Total Events</h2>
-                <h3 class="fs_40 fw_500 dark-blue-clr p_t_20">0</h3>
-            </aside>
-            <aside class="border p_20 ">
-                <h2 class="fs_14 fw_500 gray-400">Total Events</h2>
-                <h3 class="fs_40 fw_500 dark-blue-clr p_t_20">0</h3>
-            </aside>
-            <aside class="border p_20 ">
-                <h2 class="fs_14 fw_500 gray-400">Total Events</h2>
-                <h3 class="fs_40 fw_500 dark-blue-clr p_t_20">0</h3>
-            </aside>
-        </section>
-    </section>
+    <aside class="fs_24 fw_600">
+        My Schedules
+    </aside>
+    <aside>
+        <button (click)="openDialog()" mat-raised-button color="primary">Add Schedule</button>
+    </aside>
     <full-calendar [options]="calendarOptions" [events]="eventsPromise | async"></full-calendar>
 </section>

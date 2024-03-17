@@ -41,6 +41,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { DialogUploadImageComponent } from './layouts/admin/dialog/dialog-upload-image/dialog-upload-image.component';
 import { CommonModule } from '@angular/common';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { DialogAddSchedulesComponent } from './layouts/admin/dialog/dialog-add-schedules/dialog-add-schedules.component';
 export function momentAdapterFactory() {
   return adapterFactory(moment);
 };
@@ -85,9 +86,10 @@ export function momentAdapterFactory() {
     FullCalendarModule,
     DialogUploadImageComponent,
     BrowserModule,
-    CommonModule
+    CommonModule,
+    DialogAddSchedulesComponent,
   ],
-  providers: [provideAnimations(),{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [AppComponent,provideAnimations(),{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

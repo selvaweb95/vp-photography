@@ -20,9 +20,8 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class CreateEventComponent {
   constructor(public dialog: MatDialog,private http: SharedService,private router:Router,private loader:AppComponent,private route:ActivatedRoute) {
-    console.log(route.snapshot.paramMap.get('id'));
-    
     if (route.snapshot.paramMap.get('id') != "0") {
+      this.isDuplicate = true
       loader.loader=true
       http.getCoustomerById(route.snapshot.paramMap.get('id')).subscribe((res:any)=>{
         if (res.isSucceeded) {
@@ -35,9 +34,12 @@ export class CreateEventComponent {
   }
 
   welcomeImage:any;
+  isDuplicate:boolean = false
   eventValidation = {
     isCustomerName : false,
     isCustomerFullName : false,
+    isCustomerPhonenumber : false,
+    isCustomerPassword : false,
     isCustomerEmail : false,
     isEventType: false,
     isEventDate: false,
@@ -45,13 +47,17 @@ export class CreateEventComponent {
     isAlbumValidTill : false,
     isAlbumLimit: false,
     isCustomerWelcomeImage: false,
-    isEventList : false
+    isEventList : false,
+    isSignature : false,
+    isSignatureCoverPic : false
   }
 
   eventDetails={
     id:0,
     customerName : "",
     customerFullName : "",
+    customerPhonenumber: "",
+    customerPassword: "",
     customerEmail : "",
     eventType: "",
     eventDate: "",
@@ -66,13 +72,17 @@ export class CreateEventComponent {
         isAdded:false,
         isValid:false
       }
-    ]
+    ],
+    signature : [{name:"",file:""}],
+    signatureCoverPic:"",
   }
 
   validateEvent(){
     this.eventValidation = {
       isCustomerName : false,
       isCustomerFullName : false,
+      isCustomerPhonenumber : false,
+      isCustomerPassword : false,
       isCustomerEmail : false,
       isEventType: false,
       isEventDate: false,
@@ -80,7 +90,9 @@ export class CreateEventComponent {
       isAlbumValidTill : false,
       isAlbumLimit: false,
       isCustomerWelcomeImage: false,
-      isEventList : false
+      isEventList : false,
+      isSignature : false,
+      isSignatureCoverPic : false
     }
     switch (true) {
       case this.eventDetails.customerName=="" :
@@ -102,10 +114,18 @@ export class CreateEventComponent {
           this.eventValidation.isAlbumValidTill = true
           
       case this.eventDetails.albumLimit=="" :
-          this.eventValidation.isAlbumLimit = true
+        this.eventDetails.albumLimit = '0';
           
       case this.eventDetails.customerWelcomeImage=="" :
           this.eventValidation.isCustomerWelcomeImage = true;
+
+      case this.eventDetails.customerPhonenumber=="" :
+            this.eventValidation.isCustomerPhonenumber = true
+            
+      case this.eventDetails.customerPassword=="" :
+            this.eventValidation.isCustomerPassword = true;
+      
+        
           
     }
       
@@ -132,9 +152,24 @@ export class CreateEventComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed',result);
-      this.eventDetails.eventList[index].photos = result
-      this.eventDetails.eventList[index].isAdded = true;
-      this.eventDetails.eventList[index].isValid = false
+      if (result) {
+        this.eventDetails.eventList[index].photos = result
+        this.eventDetails.eventList[index].isAdded = true;
+        this.eventDetails.eventList[index].isValid = false
+      }
+    });
+  }
+  AddSignature(){
+    const dialogRef = this.dialog.open(DialogUploadImageComponent, {
+      width: '90%',
+      data: this.eventDetails.signature
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);
+      if (result) {
+        this.eventDetails.signature = result
+      }
     });
   }
 
@@ -149,9 +184,11 @@ export class CreateEventComponent {
   
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed',result);
-        this.eventDetails.eventList[index].photos = result
-        this.eventDetails.eventList[index].isAdded = true;
-        this.eventDetails.eventList[index].isValid = false
+        if (result) {
+          this.eventDetails.eventList[index].photos = result
+          this.eventDetails.eventList[index].isAdded = true;
+          this.eventDetails.eventList[index].isValid = false
+        }
       });
     }
   }
@@ -180,6 +217,18 @@ export class CreateEventComponent {
     }
   }
 
+  checkSignatureimage(event:any){
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event:any) => { 
+          this.eventDetails.signatureCoverPic = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  RemoveSignatureImage(){
+    this.eventDetails.signatureCoverPic = ""
+  }
   RemoveWelcomeImage()
   {
     this.eventDetails.customerWelcomeImage =""
@@ -195,17 +244,26 @@ export class CreateEventComponent {
     this.eventDetails.eventType = data
   }
 
-  createEvent(){
-    console.log(this.eventDetails,this.eventValidation);
-    console.log(typeof(this.eventDetails.albumValidTill));
-    console.log(this.validateEvent());
-    
+  createEvent(){  
     if (this.validateEvent()) {
       this.loader.loader = true
       this.http.createEvent(this.eventDetails).subscribe((res)=>{
-        console.log(res);
         if (res) {
           this.loader.loader = false
+          this.http.openSnackBar("Event Created")
+          this.router.navigateByUrl('/admin-panel');
+        }
+      }) 
+    }
+  }
+  createDuplicteEvent(){
+    if (this.validateEvent()) {
+      this.eventDetails.id = 0;
+      this.loader.loader = true
+      this.http.createEvent(this.eventDetails).subscribe((res)=>{
+        if (res) {
+          this.loader.loader = false
+          this.http.openSnackBar("Duplicate Event Created")
           this.router.navigateByUrl('/admin-panel');
         }
       }) 

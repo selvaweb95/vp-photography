@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output,OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-tabs',
@@ -10,16 +11,15 @@ export class TabsComponent implements OnInit{
   @Input() imageSelected:any[] =[];
   @Output() onTabChange = new EventEmitter<string>();
   activatedTab:string | undefined;
-  constructor(){
+  constructor(private service:SharedService){
 
   }
   ngOnInit(): void {
-    console.log("this.activatedTab",this.tabsArray[0].eventName);
-    
     this.activatedTab= this.tabsArray[0];
   }
   setTab(tabName:string){
     if (this.imageSelected.length !== 0) {
+      this.service.openSnackBar("Add the selected Photos to the Folder Before switching the Tabs")
       return false
     }
     this.activatedTab=tabName;

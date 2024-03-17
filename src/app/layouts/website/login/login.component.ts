@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoginserviceService } from 'src/app/services/loginService/loginservice.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent {
   otpErrorMsg:string=""
   checkPhone:boolean=false
 
-  constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService,private loader:AppComponent){
+  constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService,private loader:AppComponent,private _snackBar: MatSnackBar,private service:SharedService){
     if (auth.isAuthenticated()) {
       switch (localStorage.getItem('role')) {
         case "1" :
@@ -39,17 +41,19 @@ export class LoginComponent {
       try {
         this.loader.loader=true;
         this.login.postWithQuery(`/api/auth/GetOTPMail?email=${this.email}`).subscribe((responce:any)=>
-      {
+       {
         console.log(responce);
         
         if (responce.isSucceeded) {
           this.isMailCheck = false
           this.isOtpSent = true
           this.loader.loader=false;
+          this.service.openSnackBar("Otp Sent")
         } else {
           this.mailErrorMsg = responce.returnData
           this.isMailCheck = true
           this.loader.loader=false;
+          this.service.openSnackBar(responce.returnData)
         }
       })
       } catch (error) {
@@ -65,9 +69,16 @@ export class LoginComponent {
   //   } 
     
 // }
+openSnackBar(content:string) {
+  this._snackBar.open(content, 'close', {
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+  });
+}
  submitOtp(){
     console.log(this.otpEmail);
     this.loader.loader=true;
+    try {
     this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.otpEmail}`).subscribe((responce:any)=> {
       if (responce.isSuccess) {
         this.isOTPCheck = false
@@ -92,6 +103,10 @@ export class LoginComponent {
         this.loader.loader=false;
       }
     })
+    } catch (error) {
+      console.log(error);
+      this.loader.loader=false;
+    }
     // if(this.phoneNumber == null || this.phoneNumber == ""){
       // this.router.navigateByUrl('/select-photos');
     // }

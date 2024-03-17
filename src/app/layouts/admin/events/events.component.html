@@ -1,11 +1,11 @@
 <section class="events ">
     <section class="d_flex d_jc_sb">
         <aside class="fs_24 fw_600">
-            Events
+            Projects
         </aside>
         <aside>
             <button mat-raised-button class="btn-darkblue" color="primary" routerLink="/admin-panel/events/0">+
-                New Event</button>
+                New Project</button>
         </aside>
     </section>
     <section class="event-table-block border">
@@ -49,7 +49,7 @@
 
                 <ng-container matColumnDef="Createdat">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> <b> Created at </b></th>
-                    <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.createdAt | date:'shortDate'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Createdby">

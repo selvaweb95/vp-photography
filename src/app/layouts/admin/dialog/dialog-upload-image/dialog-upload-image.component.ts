@@ -24,6 +24,9 @@ export class DialogUploadImageComponent {
   removeImage(data:any){
     this.url.splice(this.url.indexOf(data),1)
   }
+  close(){
+    this.dialogRef.close(false);
+  }
   createEvent(){
     if (this.url[0].name == "") {
       this.isImage = true

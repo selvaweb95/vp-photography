@@ -11,6 +11,7 @@ import { MySchedulesComponent } from './layouts/admin/my-schedules/my-schedules.
 import { CreateEventComponent } from './layouts/admin/create-event/create-event.component';
 import { authGuardGuard } from './services/guard/auth-guard.guard';
 import { adminGuard } from './services/guard/admin.guard';
+import { SignatureComponent } from './layouts/website/signature/signature.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
     path:'select-photos',
     canActivate:[authGuardGuard],
     component:SelectListComponent
+  },
+  {
+    path:'select-photos',
+    canActivate:[authGuardGuard],
+    component:SignatureComponent
   },
   {
     path:'admin-panel',

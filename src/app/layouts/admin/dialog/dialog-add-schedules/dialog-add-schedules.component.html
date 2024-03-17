@@ -1,0 +1,25 @@
+<section class=" border p_20 m_t_20">
+    <h2 class="fs_18 fw_600 p_t_10 p_b_20 ">Customer Info</h2>
+    <section class="d_grid d_grid_3">
+        <mat-form-field appearance="outline" class="input-control">
+            <mat-label>Project Name</mat-label>
+            <input [(ngModel)]="scheduleData.eventName" matInput required placeholder="Project Name">
+            <mat-hint class="error" *ngIf="scheduleValidation.isEventName">Field is <strong>required*</strong></mat-hint> 
+          </mat-form-field>
+        <!-- <input-control [(ngModel)]="scheduleData.eventName" [value]="scheduleData.eventName"  [isError]="scheduleValidation.isEventName" ngDefaultControl [iLabel]="'Project Name'"></input-control> -->
+        <mat-form-field appearance="outline" class="input-control">
+            <mat-label>Project Date</mat-label>
+           <input matInput [(ngModel)]="scheduleData.date" value="scheduleData.date" [matDatepicker]="picker">
+           <mat-hint class="error" *ngIf="scheduleValidation.isDate">Field is <strong>required*</strong></mat-hint>
+           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+           <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        <!-- <datepicker-control [(ngModel)]="scheduleData.date" [value]="scheduleData.date" (selectedDate)="addDate($event)" [isError]="scheduleValidation.isDate" [iLabel]="'Project Date'"></datepicker-control> -->
+
+        <!-- <input type="text" [(ngModel)]="scheduleData.eventName" > -->
+        <!-- <input type="date" [(ngModel)]="scheduleData.date" ngDefaultControl > -->
+    </section>
+    <aside class="d_flex d_jc_end gap_15 m_t_20">
+        <button mat-raised-button class="btn-darkblue" (click)="addSchedule()" color="primary">Add Schedule</button>
+    </aside>
+</section>

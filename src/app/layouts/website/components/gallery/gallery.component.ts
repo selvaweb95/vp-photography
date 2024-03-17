@@ -27,11 +27,7 @@ export class GalleryComponent {
   constructor(public gallery: Gallery, public lightbox: Lightbox,private service:SharedService) {}
 
   ngOnInit() {
-    /** Basic Gallery Example */
-   
-    // Creat gallery items
-    console.log(this.eventList);
-    
+
     this.items = this.eventList?.photos.map(
       (item: { file: any; }) => new ImageItem({ src: item.file, thumb: item.file })
     );
@@ -41,29 +37,24 @@ export class GalleryComponent {
       this.selectedFav.push(this.FavouriteList[index].id)
       
     }
-    // console.log(this.isActiveFav(this.FavouriteList[0]));
-    
-    // this.favorite=
-    /** Lightbox Example */
 
-    // Get a lightbox gallery ref
     const lightboxRef = this.gallery.ref('lightbox');
 
-    // Add custom gallery config to the lightbox (optional)
     lightboxRef.setConfig({
       imageSize: ImageSize.Cover,
       thumbPosition: ThumbnailsPosition.Top,
     });
 
-    // Load items into the lightbox gallery ref
     console.log(this.items[0]);
     
     lightboxRef.load(this.items);
   }
 
   selectImage(item:any) {
-    if (this.selectedImage.length > this.albumLimit) {
-      return false
+    if (this.albumLimit != 0) {
+      if (this.selectedImage.length > this.albumLimit) {
+        return false
+      }
     }
     if (this.selectedImage.includes(item)) {
       this.selectedImage.splice(this.selectedImage.findIndex(r=>r == item),1)

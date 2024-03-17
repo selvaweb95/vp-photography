@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class SharedService {
 
   baseUrl = `${environment.baseUrl}`
 
-  constructor(private http: HttpClient ) {}
+  constructor(private http: HttpClient,private _snackBar: MatSnackBar ) {}
   createEvent(payload:any){
     return this.http.post(this.baseUrl+"/api/adminmanagement/AddCustomer",payload)
   }
@@ -38,5 +39,15 @@ export class SharedService {
   }
   updateSelectedImage(payload:any){
     return this.http.post(this.baseUrl+`/api/customerpanel/AddSelectedImages`,payload)
+  }
+  createCalendar(payload:any){
+    return this.http.post(this.baseUrl+`/api/adminmanagement/CreateCalendar`,payload)
+  }
+
+  openSnackBar(content:string) {
+    this._snackBar.open(content, 'close', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }
