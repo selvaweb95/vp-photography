@@ -28,6 +28,7 @@ export class AuthInterceptorService implements HttpInterceptor {
                     localStorage.removeItem('role')
                     localStorage.removeItem('id')
                     this.router.navigate(['/home'])
+                    this.loader.loader=false
                 }
               }
       

@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   GalleryItem,
   ImageItem,
@@ -10,31 +11,32 @@ import {
 
 @Component({
   selector: 'app-signature',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './signature.component.html',
   styleUrl: './signature.component.scss'
 })
-export class SignatureComponent implements OnInit {
+export class SignatureComponent {
   items: GalleryItem[] = [];
 
-  @Input() image:any
-  @Input() CoverImage:any 
-  @Input() coustomerName:any 
-  @Input() eventDate:any 
+  image=[]
+  CoverImage=""
+  coustomerName="" 
+ eventDate=""
 
   imageData:any;
   landingImg:boolean=true;
-  constructor(public gallery: Gallery) {
+  constructor(public gallery: Gallery,private router: Router) { 
+    console.log(router.getCurrentNavigation()?.extras.state);
+    this.coustomerName = router.getCurrentNavigation()?.extras.state?.['coustomerName'];
+      this.eventDate = router.getCurrentNavigation()?.extras.state?.['eventDate'].split("T")[0]; 
+      this.CoverImage = router.getCurrentNavigation()?.extras.state?.['CoverImage'];
+      this.image = router.getCurrentNavigation()?.extras.state?.['image'];
     setTimeout(() => {
       this.landingImg=false
     }, 3000);
-  }
-  ngOnInit(): void {
-    this.items = this.image?.photos.map(
+    this.items = this.image.map(
       (item: { file: any; }) => new ImageItem({ src: item.file, thumb: item.file })
     );
-    this.imageData=this.image?.photos
+    this.imageData=this.image
 
     const lightboxRef = this.gallery.ref('lightbox');
 
@@ -46,4 +48,5 @@ export class SignatureComponent implements OnInit {
     
     lightboxRef.load(this.items);
   }
+
 }

@@ -37,14 +37,14 @@ const routes: Routes = [
     component:UserPhotosComponent
   },
   {
-    path:'select-photos',
+    path:'signature-photos',
     canActivate:[authGuardGuard],
-    component:SelectListComponent
+    component:SignatureComponent
   },
   {
     path:'select-photos',
     canActivate:[authGuardGuard],
-    component:SignatureComponent
+    component:SelectListComponent
   },
   {
     path:'admin-panel',

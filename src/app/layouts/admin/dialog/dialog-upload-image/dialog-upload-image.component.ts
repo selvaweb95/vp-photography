@@ -46,6 +46,8 @@ export class DialogUploadImageComponent {
             let reader = new FileReader();
             file = event.target.files [i];
             reader.onload = (file:any) => {
+              console.log({name:event.target.files[i].name,file:reader.result });
+              
               this.url.push({name:event.target.files[i].name,file:reader.result }) 
              }
             reader.readAsDataURL(file)

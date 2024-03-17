@@ -63,7 +63,7 @@ export class UserPhotosComponent {
     let data={ "eventName" : this.activeEvent.eventName, selectedImage : this.selectedImage }
     this.service.updateSelectedImage(data).subscribe((data:any)=>{
       console.log(data);
-      if (data.isSuccessed) {
+      if (data.isSucceeded) {
         this.newlySelected = false
         this.service.openSnackBar("Added to Album")
       }

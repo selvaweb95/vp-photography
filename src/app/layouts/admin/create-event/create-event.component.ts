@@ -162,7 +162,6 @@ export class CreateEventComponent {
   AddSignature(){
     const dialogRef = this.dialog.open(DialogUploadImageComponent, {
       width: '90%',
-      data: this.eventDetails.signature
     });
 
     dialogRef.afterClosed().subscribe(result => {

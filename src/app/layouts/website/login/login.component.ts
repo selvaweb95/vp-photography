@@ -18,7 +18,9 @@ export class LoginComponent {
   isOTPCheck:boolean=false
   mailErrorMsg:string=""
   otpErrorMsg:string=""
+  password:string=""
   checkPhone:boolean=false
+  isPassword:boolean=false
 
   constructor(private router: Router,private login:LoginserviceService,private auth:LoginserviceService,private loader:AppComponent,private _snackBar: MatSnackBar,private service:SharedService){
     if (auth.isAuthenticated()) {
@@ -45,10 +47,17 @@ export class LoginComponent {
         console.log(responce);
         
         if (responce.isSucceeded) {
-          this.isMailCheck = false
-          this.isOtpSent = true
-          this.loader.loader=false;
-          this.service.openSnackBar("Otp Sent")
+          if (responce.roleId==2) {
+            this.isMailCheck = false
+            this.loader.loader=false;
+            this.isPassword = true;
+            this.isOtpSent = true
+          } else {
+            this.isMailCheck = false
+            this.isOtpSent = true
+            this.loader.loader=false;
+            this.service.openSnackBar("Otp Sent")
+          }
         } else {
           this.mailErrorMsg = responce.returnData
           this.isMailCheck = true
@@ -107,11 +116,37 @@ openSnackBar(content:string) {
       console.log(error);
       this.loader.loader=false;
     }
-    // if(this.phoneNumber == null || this.phoneNumber == ""){
-      // this.router.navigateByUrl('/select-photos');
-    // }
-    // else{
-      // this.router.navigateByUrl('/admin-panel');
-    // }
+  }
+  submitPassword(){
+    this.loader.loader=true;
+    try {
+    this.login.postWithQuery(`/api/auth/VerifyOTPMail?email=${this.email}&otp=${this.password}`).subscribe((responce:any)=> {
+      if (responce.isSuccess) {
+        this.isOTPCheck = false
+        localStorage.setItem('token',responce.userToken.split(":")[1])
+        localStorage.setItem('role',responce.userRole) 
+        localStorage.setItem('id',responce.userId) 
+        // this.router.navigateByUrl('/admin-panel');
+        switch (responce.userRole) {
+          case "1" :
+            this.loader.loader=false;
+            this.router.navigateByUrl('/admin-panel');
+            break;
+          
+          case "2":
+            this.loader.loader=false;
+            this.router.navigateByUrl('/select-photos');
+            break;
+        }
+      } else {
+        this.otpErrorMsg = responce.userToken
+        this.isOTPCheck = true
+        this.loader.loader=false;
+      }
+    })
+    } catch (error) {
+      console.log(error);
+      this.loader.loader=false;
+    }
   }
 }

@@ -39,9 +39,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { DialogUploadImageComponent } from './layouts/admin/dialog/dialog-upload-image/dialog-upload-image.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { DialogAddSchedulesComponent } from './layouts/admin/dialog/dialog-add-schedules/dialog-add-schedules.component';
+import { SignatureComponent } from './layouts/website/signature/signature.component';
 export function momentAdapterFactory() {
   return adapterFactory(moment);
 };
@@ -62,7 +63,8 @@ export function momentAdapterFactory() {
     CreateEventComponent,
     SelectControlComponent,
     DatepickerControlComponent,
-    InputControlComponent
+    InputControlComponent,
+    SignatureComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,7 @@ export function momentAdapterFactory() {
     DialogUploadImageComponent,
     BrowserModule,
     CommonModule,
-    DialogAddSchedulesComponent,
+    DialogAddSchedulesComponent
   ],
   providers: [AppComponent,provideAnimations(),{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent],

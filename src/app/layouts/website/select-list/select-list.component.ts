@@ -38,6 +38,8 @@ export class SelectListComponent {
     this.router.navigate([url], { state: { image: this.welcomeImage,coustomerName:this.response.customerName,tabs:this.response.eventList,eventDate: this.response.eventDate,FavouriteList: this.response.favouriteList,albumLimit : this.response.albumLimit } });
   }
   navigateToSignature(url:string){
+    console.log(this.response.customerName);
+    
     this.router.navigate([url], { state: { CoverImage: this.response.signatureCoverPic,image: this.response.signature,coustomerName:this.response.customerName,eventDate: this.response.eventDate } });
   }
 }
