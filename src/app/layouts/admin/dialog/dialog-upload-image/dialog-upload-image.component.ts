@@ -4,6 +4,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {MatButtonModule} from '@angular/material/button';
+import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-dialog-upload-image',
   standalone: true,
@@ -12,8 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './dialog-upload-image.component.scss'
 })
 export class DialogUploadImageComponent {
+  loader:boolean=false;
   constructor(private dialogRef: MatDialogRef<DialogUploadImageComponent>,@Inject(MAT_DIALOG_DATA) public data: any){ 
-
       if (data) {
         console.log(data);
         this.url = data.photos
@@ -38,6 +39,7 @@ export class DialogUploadImageComponent {
   
   url: Array<{name:any,file:any}> = [];
   checkimage(event:any){ 
+    this.loader = true
       let reader = new FileReader();
       console.log(event.target.files);
       
@@ -46,13 +48,13 @@ export class DialogUploadImageComponent {
             let reader = new FileReader();
             file = event.target.files [i];
             reader.onload = (file:any) => {
-              console.log({name:event.target.files[i].name,file:reader.result });
-              
               this.url.push({name:event.target.files[i].name,file:reader.result }) 
+              if (this.url.length == event.target.files.length) {
+                this.loader=false
+              }
              }
             reader.readAsDataURL(file)
           }
       this.isImage = false
-
   }
 }

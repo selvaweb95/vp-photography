@@ -86,7 +86,6 @@ export function momentAdapterFactory() {
     MatDatepickerModule,
     HttpClientModule,
     FullCalendarModule,
-    DialogUploadImageComponent,
     BrowserModule,
     CommonModule,
     DialogAddSchedulesComponent
